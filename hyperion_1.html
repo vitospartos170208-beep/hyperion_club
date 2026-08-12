@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ГИПЕРИОН — клуб кикбоксинга</title>
+<meta name="description" content="Клуб кикбоксинга «Гиперион». Тренировки для взрослых и детей.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ 1. ТОКЕНЫ ============ */
+:root{
+  /* 60% — база */
+  --bg:#0B0B0D;
+  --bg-alt:#0F0F12;
+  /* 30% — поверхности и текст */
+  --surface:#16161A;
+  --surface-2:#1E1E24;
+  --line:#2A2A31;
+  --text:#ECECEE;
+  --muted:#8C8C96;
+  --muted-2:#5E5E68;
+  /* 10% — акцент */
+  --accent:#FF6A00;
+  --accent-hi:#FF8B33;
+  --accent-dim:rgba(255,106,0,.12);
+
+  --ff-head:'Oswald',Impact,sans-serif;
+  --ff-body:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+
+  --container:1240px;
+  --gut:24px;
+  --sec-pad:clamp(64px,9vw,128px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+/* ============ 2. RESET ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--ff-body);font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+::selection{background:var(--accent);color:#000}
+
+/* зерно поверх всего */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============ 3. ТИПОГРАФИКА ============ */
+h1,h2,h3,h4,.h{font-family:var(--ff-head);font-weight:700;text-transform:uppercase;line-height:1.02;letter-spacing:.01em}
+h1{font-size:clamp(2.6rem,7.5vw,6rem)}
+h2{font-size:clamp(2rem,4.6vw,3.6rem)}
+h3{font-size:clamp(1.15rem,2vw,1.5rem);font-weight:600}
+p{text-wrap:pretty}
+
+.container{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:var(--gut)}
+.accent{color:var(--accent)}
+
+/* плейсхолдер-текст: то, что заменяем на реальный контент */
+.ph-text{color:var(--muted-2);font-style:italic}
+.ph-text::before{content:"✎ ";font-style:normal;color:var(--accent);opacity:.5}
+
+/* плейсхолдер-картинка */
+.ph-img{
+  position:relative;background:linear-gradient(150deg,#17171C,#0E0E11);
+  border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;
+}
+.ph-img::before{
+  content:"";position:absolute;inset:0;
+  background-image:repeating-linear-gradient(135deg,transparent 0 16px,rgba(255,106,0,.045) 16px 17px);
+}
+.ph-img span{
+  position:relative;font-family:var(--ff-head);text-transform:uppercase;
+  font-size:.7rem;letter-spacing:.22em;color:var(--muted-2);text-align:center;padding:8px 14px;
+  border:1px solid var(--line);background:rgba(11,11,13,.6);
+}
+
+/* ============ 4. КНОПКИ ============ */
+.btn{
+  --btn-bg:var(--accent);--btn-fg:#0B0B0D;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--ff-head);font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+  font-size:.95rem;padding:16px 32px;background:var(--btn-bg);color:var(--btn-fg);
+  border:1px solid var(--btn-bg);cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .18s var(--ease),box-shadow .25s var(--ease),background .2s;
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px -10px rgba(255,106,0,.65);background:var(--accent-hi)}
+.btn:active{transform:translateY(0)}
+.btn--ghost{--btn-bg:transparent;--btn-fg:var(--text);border-color:var(--line)}
+.btn--ghost:hover{--btn-bg:transparent;border-color:var(--accent);color:var(--accent);box-shadow:none}
+.btn--sm{padding:11px 22px;font-size:.82rem}
+.btn--block{width:100%}
+
+/* ============ 5. ШАПКА ============ */
+.header{
+  position:fixed;inset:0 0 auto;z-index:1000;
+  transition:background .3s var(--ease),border-color .3s,backdrop-filter .3s;
+  border-bottom:1px solid transparent;
+}
+.header.is-stuck{background:rgba(11,11,13,.86);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+.header__in{display:flex;align-items:center;gap:32px;height:78px;transition:height .3s var(--ease)}
+.header.is-stuck .header__in{height:66px}
+
+.logo{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.logo__mark{
+  width:34px;height:34px;flex-shrink:0;background:var(--accent);
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+  display:grid;place-items:center;
+}
+.logo__mark svg{width:17px;height:17px}
+.logo__txt{font-family:var(--ff-head);font-weight:700;font-size:1.32rem;letter-spacing:.14em;line-height:1}
+.logo__sub{display:block;font-family:var(--ff-body);font-size:.55rem;letter-spacing:.3em;color:var(--muted);font-weight:500;margin-top:3px}
+
+.nav{margin-left:auto}
+.nav__list{display:flex;gap:26px}
+.nav__link{
+  font-family:var(--ff-head);text-transform:uppercase;font-size:.83rem;letter-spacing:.09em;
+  color:var(--muted);position:relative;padding:6px 0;transition:color .2s;white-space:nowrap;
+}
+.nav__link::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);transition:width .25s var(--ease)}
+.nav__link:hover,.nav__link.is-active{color:var(--text)}
+.nav__link:hover::after,.nav__link.is-active::after{width:100%}
+
+.header__cta{display:flex;align-items:center;gap:18px;flex-shrink:0}
+.header__tel{font-family:var(--ff-head);font-size:.95rem;letter-spacing:.05em;white-space:nowrap;transition:color .2s}
+.header__tel:hover{color:var(--accent)}
+
+.burger{display:none;width:44px;height:44px;background:none;border:1px solid var(--line);cursor:pointer;position:relative;flex-shrink:0;margin-left:auto}
+.burger span{position:absolute;left:12px;width:20px;height:2px;background:var(--text);transition:.28s var(--ease)}
+.burger span:nth-child(1){top:15px}
+.burger span:nth-child(2){top:21px}
+.burger span:nth-child(3){top:27px}
+.burger.is-open span:nth-child(1){top:21px;transform:rotate(45deg)}
+.burger.is-open span:nth-child(2){opacity:0}
+.burger.is-open span:nth-child(3){top:21px;transform:rotate(-45deg)}
+
+.mobnav{
+  position:fixed;inset:0;z-index:999;background:var(--bg);
+  padding:110px var(--gut) 40px;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .38s var(--ease);overflow-y:auto;
+}
+.mobnav.is-open{transform:translateX(0)}
+.mobnav__list{display:flex;flex-direction:column;gap:4px;margin-bottom:auto}
+.mobnav__link{
+  font-family:var(--ff-head);text-transform:uppercase;font-size:1.5rem;letter-spacing:.05em;
+  padding:14px 0;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:14px;
+}
+.mobnav__link i{font-style:normal;font-size:.7rem;color:var(--accent);font-family:var(--ff-body)}
+.mobnav__foot{padding-top:32px;display:flex;flex-direction:column;gap:14px}
+
+/* ============ 6. HERO ============ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:130px 0 60px;overflow:hidden}
+.hero__bg{position:absolute;inset:0;z-index:0}
+.hero__bg::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(90% 70% at 78% 22%,rgba(255,106,0,.17),transparent 62%),
+    radial-gradient(70% 60% at 10% 90%,rgba(255,106,0,.06),transparent 60%),
+    linear-gradient(180deg,#0B0B0D 0%,#101013 55%,#0B0B0D 100%);
+}
+.hero__bg::after{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(80% 70% at 50% 40%,#000,transparent);
+}
+.hero__ghost{
+  position:absolute;right:-4vw;bottom:-2vh;z-index:0;pointer-events:none;user-select:none;
+  font-family:var(--ff-head);font-weight:700;font-size:clamp(9rem,26vw,24rem);line-height:.78;
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.045);letter-spacing:-.02em;
+}
+.hero__in{position:relative;z-index:2;max-width:900px}
+
+.tagline{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:26px;
+  font-family:var(--ff-head);text-transform:uppercase;font-size:.78rem;letter-spacing:.24em;color:var(--accent);
+}
+.tagline::before{content:"";width:44px;height:1px;background:var(--accent)}
+
+.hero h1{margin-bottom:26px}
+.hero h1 em{font-style:normal;color:var(--accent);display:block}
+.hero__lead{font-size:clamp(1rem,1.6vw,1.16rem);max-width:600px;margin-bottom:40px}
+.hero__actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:64px}
+.hero__note{font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:8px;width:100%;margin-top:-4px}
+.hero__note b{color:var(--accent);font-weight:600}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.stat{background:var(--bg-alt);padding:22px 20px}
+.stat__num{font-family:var(--ff-head);font-size:clamp(1.9rem,3.4vw,2.8rem);line-height:1;color:var(--accent)}
+.stat__lbl{font-size:.74rem;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);margin-top:8px}
+
+.scroll-hint{
+  position:absolute;left:var(--gut);bottom:26px;z-index:2;display:flex;align-items:center;gap:10px;
+  font-size:.66rem;text-transform:uppercase;letter-spacing:.24em;color:var(--muted-2);
+}
+.scroll-hint i{display:block;width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:drop 1.9s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ============ 7. БЕГУЩАЯ СТРОКА ============ */
+.ticker{background:var(--accent);color:#0B0B0D;overflow:hidden;padding:13px 0;border-block:1px solid #0B0B0D}
+.ticker__track{display:flex;width:max-content;animation:slide 34s linear infinite}
+.ticker:hover .ticker__track{animation-play-state:paused}
+.ticker__track span{
+  font-family:var(--ff-head);font-weight:600;text-transform:uppercase;font-size:.9rem;letter-spacing:.16em;
+  padding-inline:26px;display:flex;align-items:center;gap:26px;white-space:nowrap;
+}
+.ticker__track span::after{content:"";width:6px;height:6px;background:#0B0B0D;transform:rotate(45deg)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ============ 8. СЕКЦИИ ============ */
+.section{padding-block:var(--sec-pad);position:relative}
+.section--alt{background:var(--bg-alt)}
+.section--alt::before,.section--alt::after{content:"";position:absolute;left:0;right:0;height:1px;background:var(--line)}
+.section--alt::before{top:0}.section--alt::after{bottom:0}
+
+.sec-head{max-width:760px;margin-bottom:clamp(40px,5vw,68px)}
+.sec-head--center{margin-inline:auto;text-align:center}
+.kicker{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:18px;
+  font-family:var(--ff-head);text-transform:uppercase;font-size:.74rem;letter-spacing:.24em;color:var(--muted);
+}
+.kicker b{color:var(--accent);font-weight:600}
+.kicker::after{content:"";width:36px;height:1px;background:var(--line)}
+.sec-head h2{margin-bottom:18px}
+.sec-head h2 span{color:var(--accent)}
+.sec-head p{max-width:620px}
+.sec-head--center p{margin-inline:auto}
+
+/* ============ 9. О КЛУБЕ ============ */
+.about{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,4vw,64px);align-items:center}
+.about__media{position:relative}
+.about__media .ph-img{aspect-ratio:4/5}
+.about__badge{
+  position:absolute;right:-18px;bottom:32px;background:var(--accent);color:#0B0B0D;
+  padding:18px 22px;max-width:200px;
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+}
+.about__badge b{display:block;font-family:var(--ff-head);font-size:2.1rem;line-height:1}
+.about__badge span{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+.about__list{display:grid;gap:18px;margin-top:32px}
+.about__item{display:flex;gap:16px;align-items:flex-start}
+.about__item i{
+  flex-shrink:0;width:30px;height:30px;background:var(--accent-dim);border:1px solid rgba(255,106,0,.3);
+  display:grid;place-items:center;font-style:normal;font-family:var(--ff-head);font-size:.8rem;color:var(--accent);
+}
+.about__item h4{font-size:1rem;margin-bottom:3px}
+.about__item p{font-size:.9rem}
+
+/* ============ 10. НАПРАВЛЕНИЯ ============ */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{
+  background:var(--surface);border:1px solid var(--line);padding:30px 26px 32px;
+  position:relative;overflow:hidden;transition:border-color .3s var(--ease),transform .3s var(--ease),background .3s;
+}
+.card::before{
+  content:"";position:absolute;left:0;top:0;width:100%;height:2px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);
+}
+.card:hover{border-color:#3A3A44;transform:translateY(-4px);background:var(--surface-2)}
+.card:hover::before{transform:scaleX(1)}
+.card__no{
+  position:absolute;right:18px;top:12px;font-family:var(--ff-head);font-size:3.4rem;line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.06);
+}
+.card__ico{width:46px;height:46px;margin-bottom:20px;display:grid;place-items:center;background:var(--accent-dim);border:1px solid rgba(255,106,0,.28)}
+.card__ico svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:1.6}
+.card h3{margin-bottom:10px}
+.card p{font-size:.92rem}
+.card__meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;padding:5px 10px;border:1px solid var(--line);color:var(--muted)}
+
+/* ============ 11. ТРЕНЕРЫ ============ */
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.coach{background:var(--surface);border:1px solid var(--line);overflow:hidden;transition:border-color .3s,transform .3s var(--ease)}
+.coach:hover{border-color:var(--accent);transform:translateY(-4px)}
+.coach .ph-img{aspect-ratio:3/4;border:0;border-bottom:1px solid var(--line)}
+.coach__body{padding:22px 20px 24px}
+.coach__role{font-size:.68rem;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);margin-bottom:8px}
+.coach h3{font-size:1.18rem;margin-bottom:10px}
+.coach p{font-size:.85rem}
+
+/* ============ 12. РАСПИСАНИЕ ============ */
+.sched-wrap{border:1px solid var(--line);overflow-x:auto;background:var(--surface)}
+table.sched{width:100%;min-width:720px;border-collapse:collapse}
+.sched th,.sched td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line);font-size:.9rem}
+.sched thead th{
+  background:var(--surface-2);font-family:var(--ff-head);text-transform:uppercase;
+  font-size:.76rem;letter-spacing:.14em;color:var(--muted);font-weight:500;
+}
+.sched tbody tr{transition:background .2s}
+.sched tbody tr:hover{background:var(--surface-2)}
+.sched tbody tr:last-child td{border-bottom:0}
+.sched .day{font-family:var(--ff-head);text-transform:uppercase;letter-spacing:.08em;color:var(--text);white-space:nowrap}
+.sched .time{color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+.sched-note{margin-top:16px;font-size:.82rem;color:var(--muted)}
+
+/* ============ 13. ЦЕНЫ ============ */
+.price{background:var(--surface);border:1px solid var(--line);padding:32px 28px 34px;display:flex;flex-direction:column;position:relative;transition:.3s var(--ease)}
+.price:hover{transform:translateY(-4px);border-color:#3A3A44}
+.price--hot{border-color:var(--accent);background:linear-gradient(180deg,rgba(255,106,0,.07),transparent 45%)}
+.price__flag{
+  position:absolute;top:-1px;right:20px;background:var(--accent);color:#0B0B0D;
+  font-family:var(--ff-head);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;
+}
+.price__name{font-family:var(--ff-head);text-transform:uppercase;font-size:1.28rem;letter-spacing:.04em;margin-bottom:6px}
+.price__desc{font-size:.85rem;margin-bottom:24px;min-height:42px}
+.price__val{display:flex;align-items:baseline;gap:8px;padding-bottom:24px;border-bottom:1px solid var(--line);margin-bottom:24px}
+.price__val b{font-family:var(--ff-head);font-size:2.6rem;line-height:1;color:var(--accent)}
+.price__val span{font-size:.82rem;color:var(--muted)}
+.price ul{display:grid;gap:11px;margin-bottom:28px;flex-grow:1}
+.price li{display:flex;gap:11px;font-size:.88rem;align-items:flex-start}
+.price li::before{content:"";flex-shrink:0;width:6px;height:6px;margin-top:8px;background:var(--accent);transform:rotate(45deg)}
+
+/* ============ 14. ГАЛЕРЕЯ ============ */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:14px}
+.gallery .ph-img{height:100%;transition:.35s var(--ease)}
+.gallery .ph-img:hover{border-color:var(--accent);transform:scale(1.015)}
+.gallery .ph-img:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gallery .ph-img:nth-child(4){grid-column:span 2}
+.gallery .ph-img:nth-child(6){grid-row:span 2}
+
+/* ============ 15. ОТЗЫВЫ ============ */
+.review{background:var(--surface);border:1px solid var(--line);padding:30px 28px;position:relative}
+.review__q{font-family:var(--ff-head);font-size:4rem;line-height:.6;color:var(--accent);opacity:.28;margin-bottom:8px}
+.review p{font-size:.94rem;margin-bottom:24px}
+.review__who{display:flex;align-items:center;gap:14px;padding-top:20px;border-top:1px solid var(--line)}
+.review__ava{width:44px;height:44px;flex-shrink:0;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--ff-head);color:var(--muted-2);font-size:.8rem}
+.review__who b{display:block;font-size:.94rem}
+.review__who span{font-size:.76rem;color:var(--muted)}
+.stars{display:flex;gap:3px;margin-bottom:16px}
+.stars svg{width:15px;height:15px;fill:var(--accent)}
+
+/* ============ 16. FAQ ============ */
+.faq{max-width:860px;margin-inline:auto;border-top:1px solid var(--line)}
+.faq__item{border-bottom:1px solid var(--line)}
+.faq__q{
+  width:100%;background:none;border:0;cursor:pointer;text-align:left;
+  padding:24px 52px 24px 0;position:relative;
+  font-family:var(--ff-head);text-transform:uppercase;font-size:1.02rem;letter-spacing:.03em;
+  transition:color .2s;
+}
+.faq__q:hover{color:var(--accent)}
+.faq__q::before,.faq__q::after{content:"";position:absolute;right:12px;top:50%;background:var(--accent);transition:transform .3s var(--ease)}
+.faq__q::before{width:14px;height:2px;margin-top:-1px}
+.faq__q::after{width:2px;height:14px;margin-top:-7px;margin-right:6px}
+.faq__item.is-open .faq__q::after{transform:rotate(90deg)}
+.faq__a{max-height:0;overflow:hidden;transition:max-height .38s var(--ease)}
+.faq__a p{padding-bottom:26px;font-size:.94rem;max-width:660px}
+
+/* ============ 17. ФОРМА / CTA ============ */
+.cta{position:relative;overflow:hidden;background:var(--bg-alt)}
+.cta::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(70% 100% at 85% 50%,rgba(255,106,0,.15),transparent 65%);
+}
+.cta__grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr .9fr;gap:clamp(32px,5vw,72px);align-items:start}
+.cta__list{display:grid;gap:14px;margin-top:30px}
+.cta__list li{display:flex;gap:12px;font-size:.94rem}
+.cta__list li::before{content:"✓";color:var(--accent);font-weight:700}
+
+.form{background:var(--surface);border:1px solid var(--line);padding:clamp(26px,3vw,38px)}
+.form h3{margin-bottom:6px}
+.form>p{font-size:.86rem;color:var(--muted);margin-bottom:26px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+.field input,.field select,.field textarea{
+  width:100%;background:var(--bg);border:1px solid var(--line);padding:14px 16px;
+  transition:border-color .2s,background .2s;font-size:.95rem;
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);background:#0D0D10}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted-2)}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%238C8C96' stroke-width='1.6'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.field--err input,.field--err select{border-color:#E5484D}
+.err-msg{display:none;color:#E5484D;font-size:.76rem;margin-top:6px}
+.field--err .err-msg{display:block}
+.check{display:flex;gap:11px;align-items:flex-start;margin:20px 0 22px;font-size:.76rem;color:var(--muted);cursor:pointer}
+.check input{width:17px;height:17px;flex-shrink:0;margin-top:2px;accent-color:var(--accent)}
+.check a{color:var(--accent);text-decoration:underline}
+.form__ok{display:none;text-align:center;padding:34px 10px}
+.form__ok i{display:block;width:56px;height:56px;margin:0 auto 18px;background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);display:grid;place-items:center;font-size:1.6rem;font-style:normal}
+.form.is-sent .form__body{display:none}
+.form.is-sent .form__ok{display:block}
+
+/* ============ 18. КОНТАКТЫ ============ */
+.contacts{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,4vw,52px);align-items:stretch}
+.contacts__list{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);align-content:start}
+.cnt{background:var(--surface);padding:24px 26px}
+.cnt span{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin-bottom:7px}
+.cnt b{font-family:var(--ff-head);font-size:1.2rem;font-weight:500;letter-spacing:.02em}
+.cnt a:hover{color:var(--accent)}
+.socials{display:flex;gap:10px;margin-top:14px}
+.socials a{width:40px;height:40px;border:1px solid var(--line);display:grid;place-items:center;transition:.2s}
+.socials a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.socials svg{width:18px;height:18px;fill:currentColor}
+.map .ph-img{height:100%;min-height:340px}
+
+/* ============ 19. ПОДВАЛ ============ */
+.footer{border-top:1px solid var(--line);background:var(--bg);padding:52px 0 28px}
+.footer__top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;padding-bottom:38px;border-bottom:1px solid var(--line)}
+.footer__col h4{font-size:.8rem;letter-spacing:.16em;color:var(--muted);margin-bottom:16px}
+.footer__col li{margin-bottom:9px}
+.footer__col a{font-size:.9rem;color:var(--muted);transition:color .2s}
+.footer__col a:hover{color:var(--accent)}
+.footer__about{font-size:.85rem;color:var(--muted);margin:16px 0;max-width:300px}
+.footer__bot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;padding-top:24px;font-size:.78rem;color:var(--muted-2)}
+.footer__bot a:hover{color:var(--accent)}
+
+/* ============ 20. АНИМАЦИИ ПОЯВЛЕНИЯ ============ */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+
+/* ============ 21. АДАПТИВ ============ */
+@media (max-width:1100px){
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .footer__top{grid-template-columns:1fr 1fr}
+}
+@media (max-width:980px){
+  .nav,.header__tel{display:none}
+  .burger{display:block}
+  .header__cta .btn{display:none}
+  .about{grid-template-columns:1fr}
+  .about__media{max-width:440px}
+  .about__badge{right:0}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .cta__grid{grid-template-columns:1fr}
+  .contacts{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+  .gallery .ph-img:nth-child(6){grid-row:span 1}
+}
+@media (max-width:680px){
+  :root{--gut:18px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid-3,.grid-4{grid-template-columns:1fr}
+  .hero{min-height:auto;padding:120px 0 56px}
+  .hero__actions{margin-bottom:44px}
+  .hero__actions .btn{width:100%}
+  .scroll-hint{display:none}
+  .footer__top{grid-template-columns:1fr;gap:26px}
+  .gallery{grid-template-columns:1fr;grid-auto-rows:180px}
+  .gallery .ph-img:nth-child(1),.gallery .ph-img:nth-child(4){grid-column:span 1}
+  .gallery .ph-img:nth-child(1){grid-row:span 1}
+  .about__badge{position:static;margin-top:-24px;max-width:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ======================= ШАПКА ======================= -->
+<header class="header" id="header">
+  <div class="container header__in">
+    <a href="#hero" class="logo" aria-label="Гиперион — на главную">
+      <span class="logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#0B0B0D"><path d="M7 8h3v3h4V8h3v8h-3v-3h-4v3H7z"/></svg>
+      </span>
+      <span class="logo__txt">ГИПЕРИОН<span class="logo__sub">клуб кикбоксинга</span></span>
+    </a>
+
+    <nav class="nav" aria-label="Основная навигация">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#about">О клубе</a></li>
+        <li><a class="nav__link" href="#directions">Направления</a></li>
+        <li><a class="nav__link" href="#coaches">Тренеры</a></li>
+        <li><a class="nav__link" href="#schedule">Расписание</a></li>
+        <li><a class="nav__link" href="#prices">Цены</a></li>
+        <li><a class="nav__link" href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+
+    <div class="header__cta">
+      <a href="tel:+70000000000" class="header__tel">+7 (000) 000-00-00</a>
+      <a href="#signup" class="btn btn--sm">Пробная тренировка</a>
+    </div>
+
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="mobnav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- мобильное меню -->
+<div class="mobnav" id="mobnav">
+  <ul class="mobnav__list">
+    <li><a class="mobnav__link" href="#about"><i>01</i>О клубе</a></li>
+    <li><a class="mobnav__link" href="#directions"><i>02</i>Направления</a></li>
+    <li><a class="mobnav__link" href="#coaches"><i>03</i>Тренеры</a></li>
+    <li><a class="mobnav__link" href="#schedule"><i>04</i>Расписание</a></li>
+    <li><a class="mobnav__link" href="#prices"><i>05</i>Цены</a></li>
+    <li><a class="mobnav__link" href="#faq"><i>06</i>Вопросы</a></li>
+    <li><a class="mobnav__link" href="#contacts"><i>07</i>Контакты</a></li>
+  </ul>
+  <div class="mobnav__foot">
+    <a href="tel:+70000000000" class="btn btn--ghost btn--block">+7 (000) 000-00-00</a>
+    <a href="#signup" class="btn btn--block">Записаться на пробную</a>
+  </div>
+</div>
+
+<main>
+<!-- ======================= HERO ======================= -->
+<section class="hero" id="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__ghost" aria-hidden="true">HPRN</div>
+
+  <div class="container hero__in">
+    <span class="tagline">Кикбоксинг · Тайский бокс · Бокс</span>
+
+    <h1>Заголовок<br>первого экрана<em>в две строки</em></h1>
+
+    <p class="hero__lead ph-text">Подзаголовок: одно-два предложения о том, кому подходит клуб и какой результат человек получит. 15–25 слов, без воды.</p>
+
+    <div class="hero__actions">
+      <a href="#signup" class="btn">Записаться на пробную</a>
+      <a href="#directions" class="btn btn--ghost">Смотреть направления</a>
+      <span class="hero__note"><b>—</b> первая тренировка бесплатно · текст уточним</span>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat__num">00</div><div class="stat__lbl">лет клубу</div></div>
+      <div class="stat"><div class="stat__num">000</div><div class="stat__lbl">учеников</div></div>
+      <div class="stat"><div class="stat__num">00</div><div class="stat__lbl">призёров</div></div>
+      <div class="stat"><div class="stat__num">0</div><div class="stat__lbl">зала в городе</div></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true"><i></i> листайте</div>
+</section>
+
+<!-- ======================= БЕГУЩАЯ СТРОКА ======================= -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span>Дисциплина</span><span>Сила</span><span>Характер</span><span>Техника</span><span>Выносливость</span><span>Уважение</span>
+    <span>Дисциплина</span><span>Сила</span><span>Характер</span><span>Техника</span><span>Выносливость</span><span>Уважение</span>
+  </div>
+</div>
+
+<!-- ======================= О КЛУБЕ ======================= -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about">
+      <div class="about__media rv">
+        <div class="ph-img"><span>фото 4:5 — зал / тренировка</span></div>
+        <div class="about__badge"><b>00</b><span>лет в городе</span></div>
+      </div>
+
+      <div class="rv">
+        <span class="kicker"><b>01</b> — О клубе</span>
+        <h2>Заголовок блока <span>о клубе</span></h2>
+        <p class="ph-text">Абзац о клубе: кто вы, сколько лет работаете, чем отличаетесь от зала «через дорогу». 3–4 предложения живым языком, без «динамично развивающейся команды профессионалов».</p>
+
+        <div class="about__list">
+          <div class="about__item">
+            <i>01</i>
+            <div><h4>Преимущество первое</h4><p class="ph-text">Одно предложение-расшифровка.</p></div>
+          </div>
+          <div class="about__item">
+            <i>02</i>
+            <div><h4>Преимущество второе</h4><p class="ph-text">Одно предложение-расшифровка.</p></div>
+          </div>
+          <div class="about__item">
+            <i>03</i>
+            <div><h4>Преимущество третье</h4><p class="ph-text">Одно предложение-расшифровка.</p></div>
+          </div>
+          <div class="about__item">
+            <i>04</i>
+            <div><h4>Преимущество четвёртое</h4><p class="ph-text">Одно предложение-расшифровка.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= НАПРАВЛЕНИЯ ======================= -->
+<section class="section section--alt" id="directions">
+  <div class="container">
+    <div class="sec-head rv">
+      <span class="kicker"><b>02</b> — Направления</span>
+      <h2>Что <span>тренируем</span></h2>
+      <p class="ph-text">Подводка к блоку: 1–2 предложения. Например, что есть группы под любой уровень и возраст.</p>
+    </div>
+
+    <div class="grid-3">
+      <article class="card rv">
+        <div class="card__no">01</div>
+        <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M6 10a4 4 0 018 0v5a3 3 0 01-3 3H9a3 3 0 01-3-3z"/><path d="M14 12h2a2 2 0 010 4h-2"/></svg></div>
+        <h3>Направление 01</h3>
+        <p class="ph-text">2–3 предложения: для кого, что даёт, чем занимаются на тренировке.</p>
+        <div class="card__meta"><span class="tag">возраст</span><span class="tag">уровень</span><span class="tag">длительность</span></div>
+      </article>
+
+      <article class="card rv">
+        <div class="card__no">02</div>
+        <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></div>
+        <h3>Направление 02</h3>
+        <p class="ph-text">2–3 предложения: для кого, что даёт, чем занимаются на тренировке.</p>
+        <div class="card__meta"><span class="tag">возраст</span><span class="tag">уровень</span><span class="tag">длительность</span></div>
+      </article>
+
+      <article class="card rv">
+        <div class="card__no">03</div>
+        <div class="card__ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div>
+        <h3>Направление 03</h3>
+        <p class="ph-text">2–3 предложения: для кого, что даёт, чем занимаются на тренировке.</p>
+        <div class="card__meta"><span class="tag">возраст</span><span class="tag">уровень</span><span class="tag">длительность</span></div>
+      </article>
+
+      <article class="card rv">
+        <div class="card__no">04</div>
+        <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M4 12h4l2-5 4 10 2-5h4"/></svg></div>
+        <h3>Направление 04</h3>
+        <p class="ph-text">2–3 предложения: для кого, что даёт, чем занимаются на тренировке.</p>
+        <div class="card__meta"><span class="tag">возраст</span><span class="tag">уровень</span><span class="tag">длительность</span></div>
+      </article>
+
+      <article class="card rv">
+        <div class="card__no">05</div>
+        <div class="card__ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.2"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5"/></svg></div>
+        <h3>Направление 05</h3>
+        <p class="ph-text">2–3 предложения: для кого, что даёт, чем занимаются на тренировке.</p>
+        <div class="card__meta"><span class="tag">возраст</span><span class="tag">уровень</span><span class="tag">длительность</span></div>
+      </article>
+
+      <article class="card rv">
+        <div class="card__no">06</div>
+        <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M12 4l7 4v5c0 4-3 6-7 7-4-1-7-3-7-7V8z"/></svg></div>
+        <h3>Направление 06</h3>
+        <p class="ph-text">2–3 предложения: для кого, что даёт, чем занимаются на тренировке.</p>
+        <div class="card__meta"><span class="tag">возраст</span><span class="tag">уровень</span><span class="tag">длительность</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ТРЕНЕРЫ ======================= -->
+<section class="section" id="coaches">
+  <div class="container">
+    <div class="sec-head rv">
+      <span class="kicker"><b>03</b> — Тренеры</span>
+      <h2>Кто будет <span>вас тренировать</span></h2>
+      <p class="ph-text">Подводка: 1–2 предложения о команде. Регалии тренеров — главный аргумент доверия, соберите их точно.</p>
+    </div>
+
+    <div class="grid-4">
+      <article class="coach rv">
+        <div class="ph-img"><span>портрет 3:4</span></div>
+        <div class="coach__body">
+          <div class="coach__role">должность / разряд</div>
+          <h3>Имя Фамилия</h3>
+          <p class="ph-text">Регалии, стаж, у кого учился, какие группы ведёт.</p>
+        </div>
+      </article>
+
+      <article class="coach rv">
+        <div class="ph-img"><span>портрет 3:4</span></div>
+        <div class="coach__body">
+          <div class="coach__role">должность / разряд</div>
+          <h3>Имя Фамилия</h3>
+          <p class="ph-text">Регалии, стаж, у кого учился, какие группы ведёт.</p>
+        </div>
+      </article>
+
+      <article class="coach rv">
+        <div class="ph-img"><span>портрет 3:4</span></div>
+        <div class="coach__body">
+          <div class="coach__role">должность / разряд</div>
+          <h3>Имя Фамилия</h3>
+          <p class="ph-text">Регалии, стаж, у кого учился, какие группы ведёт.</p>
+        </div>
+      </article>
+
+      <article class="coach rv">
+        <div class="ph-img"><span>портрет 3:4</span></div>
+        <div class="coach__body">
+          <div class="coach__role">должность / разряд</div>
+          <h3>Имя Фамилия</h3>
+          <p class="ph-text">Регалии, стаж, у кого учился, какие группы ведёт.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= РАСПИСАНИЕ ======================= -->
+<section class="section section--alt" id="schedule">
+  <div class="container">
+    <div class="sec-head rv">
+      <span class="kicker"><b>04</b> — Расписание</span>
+      <h2>Когда <span>тренировки</span></h2>
+      <p class="ph-text">Пришлите актуальную сетку: день, время, направление, группа, тренер, зал.</p>
+    </div>
+
+    <div class="sched-wrap rv">
+      <table class="sched">
+        <thead>
+          <tr><th>День</th><th>Время</th><th>Направление</th><th>Группа</th><th>Тренер</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="day">Понедельник</td><td class="time">00:00 — 00:00</td><td>Направление</td><td>Группа</td><td>Имя Ф.</td></tr>
+          <tr><td class="day">Вторник</td><td class="time">00:00 — 00:00</td><td>Направление</td><td>Группа</td><td>Имя Ф.</td></tr>
+          <tr><td class="day">Среда</td><td class="time">00:00 — 00:00</td><td>Направление</td><td>Группа</td><td>Имя Ф.</td></tr>
+          <tr><td class="day">Четверг</td><td class="time">00:00 — 00:00</td><td>Направление</td><td>Группа</td><td>Имя Ф.</td></tr>
+          <tr><td class="day">Пятница</td><td class="time">00:00 — 00:00</td><td>Направление</td><td>Группа</td><td>Имя Ф.</td></tr>
+          <tr><td class="day">Суббота</td><td class="time">00:00 — 00:00</td><td>Направление</td><td>Группа</td><td>Имя Ф.</td></tr>
+          <tr><td class="day">Воскресенье</td><td class="time">—</td><td>выходной</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sched-note ph-text">Сноска под таблицей: например, «расписание может меняться, актуальное — в телеграм-канале».</p>
+  </div>
+</section>
+
+<!-- ======================= ЦЕНЫ ======================= -->
+<section class="section" id="prices">
+  <div class="container">
+    <div class="sec-head sec-head--center rv">
+      <span class="kicker"><b>05</b> — Цены</span>
+      <h2>Абонементы <span>и разовые</span></h2>
+      <p class="ph-text">Подводка: 1 предложение. Цены на сайте отсекают нецелевых — не прячьте их.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="price rv">
+        <div class="price__name">Тариф 01</div>
+        <p class="price__desc ph-text">Для кого этот тариф — одна строка.</p>
+        <div class="price__val"><b>0 000 ₽</b><span>/ период</span></div>
+        <ul>
+          <li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li>
+        </ul>
+        <a href="#signup" class="btn btn--ghost btn--block">Выбрать</a>
+      </div>
+
+      <div class="price price--hot rv">
+        <div class="price__flag">Выгодно</div>
+        <div class="price__name">Тариф 02</div>
+        <p class="price__desc ph-text">Для кого этот тариф — одна строка.</p>
+        <div class="price__val"><b>0 000 ₽</b><span>/ период</span></div>
+        <ul>
+          <li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li>
+        </ul>
+        <a href="#signup" class="btn btn--block">Выбрать</a>
+      </div>
+
+      <div class="price rv">
+        <div class="price__name">Тариф 03</div>
+        <p class="price__desc ph-text">Для кого этот тариф — одна строка.</p>
+        <div class="price__val"><b>0 000 ₽</b><span>/ период</span></div>
+        <ul>
+          <li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li>
+        </ul>
+        <a href="#signup" class="btn btn--ghost btn--block">Выбрать</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ГАЛЕРЕЯ ======================= -->
+<section class="section section--alt" id="gallery">
+  <div class="container">
+    <div class="sec-head rv">
+      <span class="kicker"><b>06</b> — Зал</span>
+      <h2>Где вы будете <span>тренироваться</span></h2>
+      <p class="ph-text">6–10 живых фото: зал, ринг, мешки, раздевалка, тренировка, дети. Не стоки.</p>
+    </div>
+
+    <div class="gallery rv">
+      <div class="ph-img"><span>фото 1 — главное</span></div>
+      <div class="ph-img"><span>фото 2</span></div>
+      <div class="ph-img"><span>фото 3</span></div>
+      <div class="ph-img"><span>фото 4 — широкое</span></div>
+      <div class="ph-img"><span>фото 5</span></div>
+      <div class="ph-img"><span>фото 6 — вертикальное</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ОТЗЫВЫ ======================= -->
+<section class="section" id="reviews">
+  <div class="container">
+    <div class="sec-head rv">
+      <span class="kicker"><b>07</b> — Отзывы</span>
+      <h2>Что говорят <span>ученики</span></h2>
+      <p class="ph-text">3–6 отзывов. Лучше со скринов 2ГИС / Яндекса — так им больше верят.</p>
+    </div>
+
+    <div class="grid-3">
+      <article class="review rv">
+        <div class="review__q">“</div>
+        <div class="stars" aria-label="5 из 5">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+        </div>
+        <p class="ph-text">Текст отзыва: 2–4 предложения. Идеально — с конкретикой: «пришёл с нулём, через полгода первые соревнования».</p>
+        <div class="review__who"><div class="review__ava">ИФ</div><div><b>Имя Фамилия</b><span>кто это / сколько занимается</span></div></div>
+      </article>
+
+      <article class="review rv">
+        <div class="review__q">“</div>
+        <div class="stars" aria-label="5 из 5">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+        </div>
+        <p class="ph-text">Текст отзыва: 2–4 предложения. Родительский отзыв о детской группе работает отдельно хорошо.</p>
+        <div class="review__who"><div class="review__ava">ИФ</div><div><b>Имя Фамилия</b><span>кто это / сколько занимается</span></div></div>
+      </article>
+
+      <article class="review rv">
+        <div class="review__q">“</div>
+        <div class="stars" aria-label="5 из 5">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
+        </div>
+        <p class="ph-text">Текст отзыва: 2–4 предложения. Хорошо заходит история «боялся идти, оказалось нормально».</p>
+        <div class="review__who"><div class="review__ava">ИФ</div><div><b>Имя Фамилия</b><span>кто это / сколько занимается</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FAQ ======================= -->
+<section class="section section--alt" id="faq">
+  <div class="container">
+    <div class="sec-head sec-head--center rv">
+      <span class="kicker"><b>08</b> — Вопросы</span>
+      <h2>Частые <span>вопросы</span></h2>
+      <p class="ph-text">Соберите реальные вопросы, которые задают в директе и по телефону — они снимают возражения до звонка.</p>
+    </div>
+
+    <div class="faq rv" id="faqRoot">
+      <div class="faq__item">
+        <button class="faq__q" type="button">Вопрос 01 — например, нужна ли физподготовка?</button>
+        <div class="faq__a"><p class="ph-text">Ответ: 2–4 предложения. Прямо и без «индивидуальный подход к каждому клиенту».</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" type="button">Вопрос 02 — что взять с собой на первую тренировку?</button>
+        <div class="faq__a"><p class="ph-text">Ответ: 2–4 предложения.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" type="button">Вопрос 03 — с какого возраста берёте детей?</button>
+        <div class="faq__a"><p class="ph-text">Ответ: 2–4 предложения.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" type="button">Вопрос 04 — нужна ли своя экипировка?</button>
+        <div class="faq__a"><p class="ph-text">Ответ: 2–4 предложения.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" type="button">Вопрос 05 — обязательно ли участвовать в спаррингах?</button>
+        <div class="faq__a"><p class="ph-text">Ответ: 2–4 предложения.</p></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" type="button">Вопрос 06 — можно ли заморозить абонемент?</button>
+        <div class="faq__a"><p class="ph-text">Ответ: 2–4 предложения.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ФОРМА ======================= -->
+<section class="section cta" id="signup">
+  <div class="container cta__grid">
+    <div class="rv">
+      <span class="kicker"><b>09</b> — Запись</span>
+      <h2>Первая тренировка <span>бесплатно</span></h2>
+      <p class="ph-text">Текст-подводка к форме: что произойдёт после отправки, за сколько перезвоните, что человек ничем не обязан.</p>
+      <ul class="cta__list">
+        <li class="ph-text">Что получит после заявки — пункт 1</li>
+        <li class="ph-text">Что получит после заявки — пункт 2</li>
+        <li class="ph-text">Что получит после заявки — пункт 3</li>
+      </ul>
+    </div>
+
+    <form class="form rv" id="signupForm" novalidate>
+      <div class="form__body">
+        <h3>Записаться</h3>
+        <p>Перезвоним в течение — минут</p>
+
+        <div class="field" id="f-name">
+          <label for="i-name">Имя</label>
+          <input type="text" id="i-name" name="name" placeholder="Как к вам обращаться" autocomplete="name">
+          <span class="err-msg">Укажите имя</span>
+        </div>
+
+        <div class="field" id="f-phone">
+          <label for="i-phone">Телефон</label>
+          <input type="tel" id="i-phone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel">
+          <span class="err-msg">Укажите корректный телефон</span>
+        </div>
+
+        <div class="field" id="f-dir">
+          <label for="i-dir">Направление</label>
+          <select id="i-dir" name="direction">
+            <option value="">Выберите направление</option>
+            <option>Направление 01</option>
+            <option>Направление 02</option>
+            <option>Направление 03</option>
+            <option>Направление 04</option>
+            <option>Пока не определился</option>
+          </select>
+          <span class="err-msg">Выберите направление</span>
+        </div>
+
+        <label class="check">
+          <input type="checkbox" id="i-agree">
+          <span>Согласен на обработку персональных данных и с <a href="#">политикой конфиденциальности</a></span>
+        </label>
+
+        <button type="submit" class="btn btn--block">Отправить заявку</button>
+      </div>
+
+      <div class="form__ok" role="status">
+        <i>✓</i>
+        <h3>Заявка отправлена</h3>
+        <p>Это демо-форма. На боевом сайте заявка уходит в CRM и в телеграм тренеру.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ======================= КОНТАКТЫ ======================= -->
+<section class="section" id="contacts">
+  <div class="container">
+    <div class="sec-head rv">
+      <span class="kicker"><b>10</b> — Контакты</span>
+      <h2>Как нас <span>найти</span></h2>
+    </div>
+
+    <div class="contacts">
+      <div class="contacts__list rv">
+        <div class="cnt"><span>Адрес</span><b>г. —, ул. —, д. —</b></div>
+        <div class="cnt"><span>Телефон</span><b><a href="tel:+70000000000">+7 (000) 000-00-00</a></b></div>
+        <div class="cnt"><span>Часы работы</span><b>Пн–Сб 00:00 — 00:00</b></div>
+        <div class="cnt">
+          <span>Соцсети</span>
+          <div class="socials">
+            <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.9 4.3L18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L6.9 12.9l-4.5-1.4c-1-.3-1-1 .2-1.5l17.6-6.8c.8-.3 1.5.2 1.2 1.1z"/></svg></a>
+            <a href="#" aria-label="ВКонтакте"><svg viewBox="0 0 24 24"><path d="M12.8 17c-5 0-8-3.5-8.1-9.2h2.5c.1 4.2 2 6 3.4 6.4V7.8h2.4v3.6c1.4-.2 2.9-1.8 3.4-3.6h2.3c-.4 2.2-1.9 3.8-3 4.5 1.1.5 2.9 2 3.5 4.7h-2.6c-.5-1.6-1.8-2.9-3.6-3.1V17z"/></svg></a>
+            <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1a13 13 0 01-6.6-5.8c-.5-.8-.8-1.7-.8-2.5 0-.9.5-1.4.7-1.6.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2 0 .4-.1.6l-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.5.3.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.4.3.1.2.1.6 0 1.1z"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="map rv"><div class="ph-img"><span>карта — Яндекс.Карты / 2ГИС</span></div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ======================= ПОДВАЛ ======================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__col">
+        <a href="#hero" class="logo">
+          <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#0B0B0D"><path d="M7 8h3v3h4V8h3v8h-3v-3h-4v3H7z"/></svg></span>
+          <span class="logo__txt">ГИПЕРИОН<span class="logo__sub">клуб кикбоксинга</span></span>
+        </a>
+        <p class="footer__about ph-text">Короткое описание клуба в 1–2 строки.</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>РАЗДЕЛЫ</h4>
+        <ul>
+          <li><a href="#about">О клубе</a></li>
+          <li><a href="#directions">Направления</a></li>
+          <li><a href="#coaches">Тренеры</a></li>
+          <li><a href="#schedule">Расписание</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>КЛУБ</h4>
+        <ul>
+          <li><a href="#prices">Цены</a></li>
+          <li><a href="#gallery">Зал</a></li>
+          <li><a href="#reviews">Отзывы</a></li>
+          <li><a href="#faq">Вопросы</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>КОНТАКТЫ</h4>
+        <ul>
+          <li><a href="tel:+70000000000">+7 (000) 000-00-00</a></li>
+          <li><a href="#contacts">г. —, ул. —</a></li>
+          <li><a href="#signup">Записаться</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bot">
+      <span>© <span id="year">2026</span> Клуб кикбоксинга «Гиперион»</span>
+      <span><a href="#">Политика конфиденциальности</a> · <a href="#">Договор оферты</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---- шапка при скролле ---- */
+  var header = document.getElementById('header');
+  var onScroll = function(){
+    header.classList.toggle('is-stuck', window.scrollY > 20);
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---- мобильное меню ---- */
+  var burger = document.getElementById('burger');
+  var mobnav = document.getElementById('mobnav');
+  var toggleNav = function(open){
+    burger.classList.toggle('is-open', open);
+    mobnav.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  burger.addEventListener('click', function(){
+    toggleNav(!mobnav.classList.contains('is-open'));
+  });
+  mobnav.addEventListener('click', function(e){
+    if (e.target.closest('a')) toggleNav(false);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && mobnav.classList.contains('is-open')) toggleNav(false);
+  });
+
+  /* ---- появление при скролле ---- */
+  var items = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en, i){
+        if (en.isIntersecting) {
+          var el = en.target;
+          var sibs = Array.prototype.slice.call(el.parentNode.children).indexOf(el);
+          el.style.transitionDelay = Math.min(sibs, 5) * 70 + 'ms';
+          el.classList.add('in');
+          io.unobserve(el);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -60px 0px'});
+    items.forEach(function(el){ io.observe(el); });
+  } else {
+    items.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---- активный пункт меню ---- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav__link'));
+  var sections = links.map(function(l){ return document.querySelector(l.getAttribute('href')); });
+  if ('IntersectionObserver' in window) {
+    var navIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        var idx = sections.indexOf(en.target);
+        links.forEach(function(l, i){ l.classList.toggle('is-active', i === idx); });
+      });
+    }, {rootMargin:'-45% 0px -50% 0px'});
+    sections.forEach(function(s){ if (s) navIO.observe(s); });
+  }
+
+  /* ---- FAQ ---- */
+  document.getElementById('faqRoot').addEventListener('click', function(e){
+    var btn = e.target.closest('.faq__q');
+    if (!btn) return;
+    var item = btn.parentNode;
+    var body = item.querySelector('.faq__a');
+    var open = item.classList.contains('is-open');
+
+    this.querySelectorAll('.faq__item.is-open').forEach(function(other){
+      other.classList.remove('is-open');
+      other.querySelector('.faq__a').style.maxHeight = null;
+    });
+
+    if (!open) {
+      item.classList.add('is-open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  });
+
+  /* ---- маска телефона (простая) ---- */
+  var phone = document.getElementById('i-phone');
+  phone.addEventListener('input', function(){
+    var d = this.value.replace(/\D/g, '');
+    if (d[0] === '8') d = '7' + d.slice(1);
+    if (d[0] !== '7') d = '7' + d;
+    d = d.slice(0, 11);
+    var out = '+7';
+    if (d.length > 1) out += ' (' + d.slice(1, 4);
+    if (d.length >= 5) out += ') ' + d.slice(4, 7);
+    if (d.length >= 8) out += '-' + d.slice(7, 9);
+    if (d.length >= 10) out += '-' + d.slice(9, 11);
+    this.value = out;
+  });
+
+  /* ---- отправка формы (заглушка) ---- */
+  var form = document.getElementById('signupForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var ok = true;
+    var check = function(id, valid){
+      document.getElementById(id).classList.toggle('field--err', !valid);
+      if (!valid) ok = false;
+    };
+    check('f-name', document.getElementById('i-name').value.trim().length >= 2);
+    check('f-phone', document.getElementById('i-phone').value.replace(/\D/g,'').length === 11);
+    check('f-dir', document.getElementById('i-dir').value !== '');
+    if (!document.getElementById('i-agree').checked) ok = false;
+
+    if (!ok) return;
+    /* здесь будет реальная отправка: fetch в CRM / телеграм-бота */
+    form.classList.add('is-sent');
+  });
+
+  /* ---- год в подвале ---- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
