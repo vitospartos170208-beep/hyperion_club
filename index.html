@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ГИПЕРИОН — клуб кикбоксинга</title>
 <meta name="description" content="Клуб кикбоксинга «Гиперион». Тренировки для взрослых и детей.">
+<!-- ВРЕМЕННО: сайт не дозаполнен, закрыт от поисковиков.
+     УДАЛИТЬ эту строку перед запуском рекламы, иначе сайта не будет в поиске. -->
+<meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -83,6 +86,17 @@ p{text-wrap:pretty}
   position:relative;font-family:var(--ff-head);text-transform:uppercase;
   font-size:.7rem;letter-spacing:.22em;color:var(--muted-2);text-align:center;padding:8px 14px;
   border:1px solid var(--line);background:rgba(11,11,13,.6);
+}
+
+/* слот с реальным фото */
+.ph-img--photo{background:#0E0E11}
+.ph-img--photo img{
+  position:absolute;inset:0;z-index:1;width:100%;height:100%;
+  object-fit:cover;display:block;filter:saturate(.9) contrast(1.05);
+}
+.ph-img--photo::before{
+  z-index:2;background-image:none;
+  background:linear-gradient(180deg,rgba(11,11,13,0) 55%,rgba(11,11,13,.5) 100%);
 }
 
 /* ============ 4. КНОПКИ ============ */
@@ -174,6 +188,14 @@ p{text-wrap:pretty}
   background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
   background-size:64px 64px;
   mask-image:radial-gradient(80% 70% at 50% 40%,#000,transparent);
+}
+.hero__photo{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero__photo img{width:100%;height:100%;object-fit:cover;object-position:58% 42%;opacity:.4;filter:grayscale(.3) contrast(1.08)}
+.hero__photo::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,#0B0B0D 6%,rgba(11,11,13,.74) 46%,rgba(11,11,13,.3) 100%),
+    linear-gradient(180deg,rgba(11,11,13,.55),transparent 32%,rgba(11,11,13,.9));
 }
 .hero__ghost{
   position:absolute;right:-4vw;bottom:-2vh;z-index:0;pointer-events:none;user-select:none;
@@ -282,6 +304,10 @@ p{text-wrap:pretty}
 
 /* ============ 11. ТРЕНЕРЫ ============ */
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+/* два тренера — не растягиваем на четыре колонки */
+.grid-4--duo{grid-template-columns:repeat(2,1fr);max-width:760px;margin-inline:auto}
+/* один тренер — центрируем карточку */
+.grid-4--solo{grid-template-columns:1fr;max-width:380px;margin-inline:auto}
 .coach{background:var(--surface);border:1px solid var(--line);overflow:hidden;transition:border-color .3s,transform .3s var(--ease)}
 .coach:hover{border-color:var(--accent);transform:translateY(-4px)}
 .coach .ph-img{aspect-ratio:3/4;border:0;border-bottom:1px solid var(--line)}
@@ -317,6 +343,8 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
 .price__desc{font-size:.85rem;margin-bottom:24px;min-height:42px}
 .price__val{display:flex;align-items:baseline;gap:8px;padding-bottom:24px;border-bottom:1px solid var(--line);margin-bottom:24px}
 .price__val b{font-family:var(--ff-head);font-size:2.6rem;line-height:1;color:var(--accent)}
+/* два тарифа — не растягиваем на три колонки */
+.grid-3--duo{grid-template-columns:repeat(2,1fr);max-width:800px;margin-inline:auto}
 .price__val span{font-size:.82rem;color:var(--muted)}
 .price ul{display:grid;gap:11px;margin-bottom:28px;flex-grow:1}
 .price li{display:flex;gap:11px;font-size:.88rem;align-items:flex-start}
@@ -404,6 +432,17 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
 .socials a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
 .socials svg{width:18px;height:18px;fill:currentColor}
 .map .ph-img{height:100%;min-height:340px}
+.map{position:relative;border:1px solid var(--line);overflow:hidden;min-height:340px;background:var(--surface-2)}
+.map iframe{display:block;width:100%;height:100%;min-height:340px;border:0;filter:grayscale(.35) contrast(1.05)}
+.map:hover iframe{filter:none}
+.map__link{
+  position:absolute;left:14px;bottom:14px;z-index:2;
+  font-family:var(--ff-head);text-transform:uppercase;font-size:.7rem;letter-spacing:.14em;
+  padding:10px 16px;background:var(--accent);color:#0B0B0D;border:1px solid var(--accent);
+  clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
+  transition:background .2s,transform .2s var(--ease);
+}
+.map__link:hover{background:var(--accent-hi);transform:translateY(-2px)}
 
 /* ============ 19. ПОДВАЛ ============ */
 .footer{border-top:1px solid var(--line);background:var(--bg);padding:52px 0 28px}
@@ -446,7 +485,8 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
 @media (max-width:680px){
   :root{--gut:18px}
   .stats{grid-template-columns:repeat(2,1fr)}
-  .grid-3,.grid-4{grid-template-columns:1fr}
+  .grid-3,.grid-4,.grid-4--duo,.grid-3--duo{grid-template-columns:1fr}
+  .grid-4--duo,.grid-4--solo,.grid-3--duo{max-width:420px}
   .hero{min-height:auto;padding:120px 0 56px}
   .hero__actions{margin-bottom:44px}
   .hero__actions .btn{width:100%}
@@ -483,7 +523,7 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
     </nav>
 
     <div class="header__cta">
-      <a href="tel:+70000000000" class="header__tel">+7 (000) 000-00-00</a>
+      <a href="tel:+79508552624" class="header__tel">+7 (950) 855-26-24</a>
       <a href="#signup" class="btn btn--sm">Пробная тренировка</a>
     </div>
 
@@ -505,7 +545,7 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
     <li><a class="mobnav__link" href="#contacts"><i>07</i>Контакты</a></li>
   </ul>
   <div class="mobnav__foot">
-    <a href="tel:+70000000000" class="btn btn--ghost btn--block">+7 (000) 000-00-00</a>
+    <a href="tel:+79508552624" class="btn btn--ghost btn--block">+7 (950) 855-26-24</a>
     <a href="#signup" class="btn btn--block">Записаться на пробную</a>
   </div>
 </div>
@@ -514,6 +554,9 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
 <!-- ======================= HERO ======================= -->
 <section class="hero" id="hero">
   <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__photo" aria-hidden="true">
+    <img src="img/hyperion/hero.jpg" width="2000" height="1500" alt="" fetchpriority="high" decoding="async">
+  </div>
   <div class="hero__ghost" aria-hidden="true">HPRN</div>
 
   <div class="container hero__in">
@@ -530,10 +573,10 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
     </div>
 
     <div class="stats">
-      <div class="stat"><div class="stat__num">00</div><div class="stat__lbl">лет клубу</div></div>
-      <div class="stat"><div class="stat__num">000</div><div class="stat__lbl">учеников</div></div>
-      <div class="stat"><div class="stat__num">00</div><div class="stat__lbl">призёров</div></div>
-      <div class="stat"><div class="stat__num">0</div><div class="stat__lbl">зала в городе</div></div>
+      <div class="stat"><div class="stat__num">6</div><div class="stat__lbl">лет клубу</div></div>
+      <div class="stat"><div class="stat__num">40</div><div class="stat__lbl">учеников</div></div>
+      <div class="stat"><div class="stat__num">5</div><div class="stat__lbl">призёров</div></div>
+      <div class="stat"><div class="stat__num">1</div><div class="stat__lbl">зал в городе</div></div>
     </div>
   </div>
 
@@ -553,7 +596,10 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
   <div class="container">
     <div class="about">
       <div class="about__media rv">
-        <div class="ph-img"><span>фото 4:5 — зал / тренировка</span></div>
+        <div class="ph-img ph-img--photo">
+          <img src="img/hyperion/about.jpg" width="900" height="1200" loading="lazy" decoding="async"
+               alt="Юный боец клуба «Гиперион» в шлеме и перчатках на ринге">
+        </div>
         <div class="about__badge"><b>00</b><span>лет в городе</span></div>
       </div>
 
@@ -598,49 +644,25 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
       <article class="card rv">
         <div class="card__no">01</div>
         <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M6 10a4 4 0 018 0v5a3 3 0 01-3 3H9a3 3 0 01-3-3z"/><path d="M14 12h2a2 2 0 010 4h-2"/></svg></div>
-        <h3>Направление 01</h3>
-        <p class="ph-text">2–3 предложения: для кого, что даёт, чем занимаются на тренировке.</p>
-        <div class="card__meta"><span class="tag">возраст</span><span class="tag">уровень</span><span class="tag">длительность</span></div>
+        <h3>Кикбоксинг</h3>
+        <p>База, с которой начинают все: стойка, передвижение, удары руками и ногами, работа на мешках и лапах, общая физика. Отсюда человек переходит в тот раздел, который ему ближе.</p>
+        <div class="card__meta"><span class="tag ph-text">возраст</span><span class="tag ph-text">уровень</span><span class="tag ph-text">длительность</span></div>
       </article>
 
       <article class="card rv">
         <div class="card__no">02</div>
         <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></div>
-        <h3>Направление 02</h3>
-        <p class="ph-text">2–3 предложения: для кого, что даёт, чем занимаются на тренировке.</p>
-        <div class="card__meta"><span class="tag">возраст</span><span class="tag">уровень</span><span class="tag">длительность</span></div>
+        <h3>Лайт-контакт</h3>
+        <p>Раздел с ограниченной силой удара: судьи оценивают технику, точность и скорость, а не тяжесть попадания. Нокауты правилами исключены — поэтому с лайт-контакта обычно начинают дети и те, кто выходит на первые соревнования.</p>
+        <div class="card__meta"><span class="tag ph-text">возраст</span><span class="tag ph-text">уровень</span><span class="tag ph-text">длительность</span></div>
       </article>
 
       <article class="card rv">
         <div class="card__no">03</div>
-        <div class="card__ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div>
-        <h3>Направление 03</h3>
-        <p class="ph-text">2–3 предложения: для кого, что даёт, чем занимаются на тренировке.</p>
-        <div class="card__meta"><span class="tag">возраст</span><span class="tag">уровень</span><span class="tag">длительность</span></div>
-      </article>
-
-      <article class="card rv">
-        <div class="card__no">04</div>
         <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M4 12h4l2-5 4 10 2-5h4"/></svg></div>
-        <h3>Направление 04</h3>
-        <p class="ph-text">2–3 предложения: для кого, что даёт, чем занимаются на тренировке.</p>
-        <div class="card__meta"><span class="tag">возраст</span><span class="tag">уровень</span><span class="tag">длительность</span></div>
-      </article>
-
-      <article class="card rv">
-        <div class="card__no">05</div>
-        <div class="card__ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.2"/><path d="M3 19c0-3 2.7-5 6-5s6 2 6 5"/></svg></div>
-        <h3>Направление 05</h3>
-        <p class="ph-text">2–3 предложения: для кого, что даёт, чем занимаются на тренировке.</p>
-        <div class="card__meta"><span class="tag">возраст</span><span class="tag">уровень</span><span class="tag">длительность</span></div>
-      </article>
-
-      <article class="card rv">
-        <div class="card__no">06</div>
-        <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M12 4l7 4v5c0 4-3 6-7 7-4-1-7-3-7-7V8z"/></svg></div>
-        <h3>Направление 06</h3>
-        <p class="ph-text">2–3 предложения: для кого, что даёт, чем занимаются на тренировке.</p>
-        <div class="card__meta"><span class="tag">возраст</span><span class="tag">уровень</span><span class="tag">длительность</span></div>
+        <h3>Фулл-контакт</h3>
+        <p>Полноконтактный раздел: удары руками и ногами в полную силу, выше пояса, с нокдаунами и нокаутами. Обязательная экипировка и допуск тренера. Сюда идут те, кто хочет драться на ринге всерьёз.</p>
+        <div class="card__meta"><span class="tag ph-text">возраст</span><span class="tag ph-text">уровень</span><span class="tag ph-text">длительность</span></div>
       </article>
     </div>
   </div>
@@ -655,40 +677,16 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
       <p class="ph-text">Подводка: 1–2 предложения о команде. Регалии тренеров — главный аргумент доверия, соберите их точно.</p>
     </div>
 
-    <div class="grid-4">
+    <div class="grid-4 grid-4--solo">
       <article class="coach rv">
-        <div class="ph-img"><span>портрет 3:4</span></div>
-        <div class="coach__body">
-          <div class="coach__role">должность / разряд</div>
-          <h3>Имя Фамилия</h3>
-          <p class="ph-text">Регалии, стаж, у кого учился, какие группы ведёт.</p>
+        <div class="ph-img ph-img--photo">
+          <img src="img/hyperion/coach-2.jpg" width="676" height="900" loading="lazy" decoding="async"
+               alt="Артур Дадаян, главный тренер клуба «Гиперион», секундирует на соревнованиях">
         </div>
-      </article>
-
-      <article class="coach rv">
-        <div class="ph-img"><span>портрет 3:4</span></div>
         <div class="coach__body">
-          <div class="coach__role">должность / разряд</div>
-          <h3>Имя Фамилия</h3>
-          <p class="ph-text">Регалии, стаж, у кого учился, какие группы ведёт.</p>
-        </div>
-      </article>
-
-      <article class="coach rv">
-        <div class="ph-img"><span>портрет 3:4</span></div>
-        <div class="coach__body">
-          <div class="coach__role">должность / разряд</div>
-          <h3>Имя Фамилия</h3>
-          <p class="ph-text">Регалии, стаж, у кого учился, какие группы ведёт.</p>
-        </div>
-      </article>
-
-      <article class="coach rv">
-        <div class="ph-img"><span>портрет 3:4</span></div>
-        <div class="coach__body">
-          <div class="coach__role">должность / разряд</div>
-          <h3>Имя Фамилия</h3>
-          <p class="ph-text">Регалии, стаж, у кого учился, какие группы ведёт.</p>
+          <div class="coach__role">Главный тренер клуба</div>
+          <h3>Артур Дадаян</h3>
+          <p class="ph-text">Разряд или звание, стаж, у кого учился, какие группы ведёт — уточнить у тренера. Отчество тоже: «Игоревич» в открытых источниках не подтвердилось.</p>
         </div>
       </article>
     </div>
@@ -730,39 +728,35 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
     <div class="sec-head sec-head--center rv">
       <span class="kicker"><b>05</b> — Цены</span>
       <h2>Абонементы <span>и разовые</span></h2>
-      <p class="ph-text">Подводка: 1 предложение. Цены на сайте отсекают нецелевых — не прячьте их.</p>
+      <p>Всё просто: приходите на первую тренировку бесплатно, а дальше — один абонемент без скрытых доплат.</p>
     </div>
 
-    <div class="grid-3">
+    <div class="grid-3 grid-3--duo">
       <div class="price rv">
-        <div class="price__name">Тариф 01</div>
-        <p class="price__desc ph-text">Для кого этот тариф — одна строка.</p>
-        <div class="price__val"><b>0 000 ₽</b><span>/ период</span></div>
+        <div class="price__name">Первая тренировка</div>
+        <p class="price__desc">Познакомиться с залом и тренером, ничем себя не связывая.</p>
+        <div class="price__val"><b>Бесплатно</b></div>
         <ul>
-          <li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li>
+          <li>Полноценное занятие с группой</li>
+          <li>Форма не нужна — приходите в спортивном</li>
+          <li>Экипировку на пробную дадим</li>
+          <li>Решение принимаете после тренировки</li>
         </ul>
-        <a href="#signup" class="btn btn--ghost btn--block">Выбрать</a>
+        <a href="#signup" class="btn btn--ghost btn--block">Записаться</a>
       </div>
 
       <div class="price price--hot rv">
-        <div class="price__flag">Выгодно</div>
-        <div class="price__name">Тариф 02</div>
-        <p class="price__desc ph-text">Для кого этот тариф — одна строка.</p>
-        <div class="price__val"><b>0 000 ₽</b><span>/ период</span></div>
+        <div class="price__flag">Основной</div>
+        <div class="price__name">Абонемент</div>
+        <p class="price__desc">Для тех, кто занимается регулярно.</p>
+        <div class="price__val"><b>4 500 ₽</b><span>/ месяц</span></div>
         <ul>
-          <li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li>
+          <li>Занятия по расписанию своей группы</li>
+          <li>Кикбоксинг, лайт- и фулл-контакт</li>
+          <li>Работа с тренером на каждой тренировке</li>
+          <li>Подготовка к соревнованиям</li>
         </ul>
-        <a href="#signup" class="btn btn--block">Выбрать</a>
-      </div>
-
-      <div class="price rv">
-        <div class="price__name">Тариф 03</div>
-        <p class="price__desc ph-text">Для кого этот тариф — одна строка.</p>
-        <div class="price__val"><b>0 000 ₽</b><span>/ период</span></div>
-        <ul>
-          <li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li><li>Пункт условия</li>
-        </ul>
-        <a href="#signup" class="btn btn--ghost btn--block">Выбрать</a>
+        <a href="#signup" class="btn btn--block">Записаться</a>
       </div>
     </div>
   </div>
@@ -774,16 +768,34 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
     <div class="sec-head rv">
       <span class="kicker"><b>06</b> — Зал</span>
       <h2>Где вы будете <span>тренироваться</span></h2>
-      <p class="ph-text">6–10 живых фото: зал, ринг, мешки, раздевалка, тренировка, дети. Не стоки.</p>
+      <p>Зал, ринг, мешки, тренировки и соревнования — живые кадры с занятий и турниров, без стоков.</p>
     </div>
 
     <div class="gallery rv">
-      <div class="ph-img"><span>фото 1 — главное</span></div>
-      <div class="ph-img"><span>фото 2</span></div>
-      <div class="ph-img"><span>фото 3</span></div>
-      <div class="ph-img"><span>фото 4 — широкое</span></div>
-      <div class="ph-img"><span>фото 5</span></div>
-      <div class="ph-img"><span>фото 6 — вертикальное</span></div>
+      <div class="ph-img ph-img--photo">
+        <img src="img/hyperion/gallery-1.jpg" width="1050" height="1400" loading="lazy" decoding="async"
+             alt="Спарринг на татами в зале клуба «Гиперион»">
+      </div>
+      <div class="ph-img ph-img--photo">
+        <img src="img/hyperion/gallery-2.jpg" width="750" height="1000" loading="lazy" decoding="async"
+             alt="Юный боец отрабатывает удары по мешку">
+      </div>
+      <div class="ph-img ph-img--photo">
+        <img src="img/hyperion/gallery-3.jpg" width="1200" height="900" loading="lazy" decoding="async"
+             alt="Зал клуба: татами, боксёрские мешки, группа на разминке">
+      </div>
+      <div class="ph-img ph-img--photo">
+        <img src="img/hyperion/gallery-4.jpg" width="1600" height="1200" loading="lazy" decoding="async"
+             alt="Общее фото группы клуба «Гиперион» после тренировки">
+      </div>
+      <div class="ph-img ph-img--photo">
+        <img src="img/hyperion/gallery-5.jpg" width="750" height="1000" loading="lazy" decoding="async"
+             alt="Тренировка детской группы у шведской стенки">
+      </div>
+      <div class="ph-img ph-img--photo">
+        <img src="img/hyperion/gallery-6.jpg" width="750" height="1000" loading="lazy" decoding="async"
+             alt="Боец клуба с медалью и грамотой после соревнований">
+      </div>
     </div>
   </div>
 </section>
@@ -913,10 +925,9 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
           <label for="i-dir">Направление</label>
           <select id="i-dir" name="direction">
             <option value="">Выберите направление</option>
-            <option>Направление 01</option>
-            <option>Направление 02</option>
-            <option>Направление 03</option>
-            <option>Направление 04</option>
+            <option>Кикбоксинг</option>
+            <option>Лайт-контакт</option>
+            <option>Фулл-контакт</option>
             <option>Пока не определился</option>
           </select>
           <span class="err-msg">Выберите направление</span>
@@ -949,9 +960,9 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
 
     <div class="contacts">
       <div class="contacts__list rv">
-        <div class="cnt"><span>Адрес</span><b>г. —, ул. —, д. —</b></div>
-        <div class="cnt"><span>Телефон</span><b><a href="tel:+70000000000">+7 (000) 000-00-00</a></b></div>
-        <div class="cnt"><span>Часы работы</span><b>Пн–Сб 00:00 — 00:00</b></div>
+        <div class="cnt"><span>Адрес</span><b>Ростов-на-Дону, просп. Космонавтов, 2Е<br>микрорайон Северный</b></div>
+        <div class="cnt"><span>Телефон</span><b><a href="tel:+79508552624">+7 (950) 855-26-24</a></b></div>
+        <div class="cnt"><span>Часы работы</span><b class="ph-text">Пришлите режим по дням — на Яндекс.Картах указано только «открыто до 23:00»</b></div>
         <div class="cnt">
           <span>Соцсети</span>
           <div class="socials">
@@ -962,7 +973,15 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
         </div>
       </div>
 
-      <div class="map rv"><div class="ph-img"><span>карта — Яндекс.Карты / 2ГИС</span></div></div>
+      <div class="map rv">
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?mode=search&amp;ol=biz&amp;oid=206698001357&amp;ll=39.719450%2C47.279226&amp;z=17"
+          title="Клуб кикбоксинга «Гиперион» на Яндекс.Картах"
+          loading="lazy" allowfullscreen></iframe>
+        <a class="map__link" href="https://yandex.ru/maps/org/giperion/206698001357/" target="_blank" rel="noopener">
+          Открыть в Яндекс.Картах
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -1003,7 +1022,7 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
       <div class="footer__col">
         <h4>КОНТАКТЫ</h4>
         <ul>
-          <li><a href="tel:+70000000000">+7 (000) 000-00-00</a></li>
+          <li><a href="tel:+79508552624">+7 (950) 855-26-24</a></li>
           <li><a href="#contacts">г. —, ул. —</a></li>
           <li><a href="#signup">Записаться</a></li>
         </ul>
