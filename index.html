@@ -318,7 +318,7 @@ p{text-wrap:pretty}
 
 /* ============ 12. РАСПИСАНИЕ ============ */
 .sched-wrap{border:1px solid var(--line);overflow-x:auto;background:var(--surface)}
-table.sched{width:100%;min-width:720px;border-collapse:collapse}
+table.sched{width:100%;min-width:480px;border-collapse:collapse}
 .sched th,.sched td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line);font-size:.9rem}
 .sched thead th{
   background:var(--surface-2);font-family:var(--ff-head);text-transform:uppercase;
@@ -699,26 +699,25 @@ table.sched{width:100%;min-width:720px;border-collapse:collapse}
     <div class="sec-head rv">
       <span class="kicker"><b>04</b> — Расписание</span>
       <h2>Когда <span>тренировки</span></h2>
-      <p class="ph-text">Пришлите актуальную сетку: день, время, направление, группа, тренер, зал.</p>
+      <p>Тренировки три раза в неделю — понедельник, среда и пятница. Две группы идут подряд.</p>
     </div>
 
     <div class="sched-wrap rv">
       <table class="sched">
         <thead>
-          <tr><th>День</th><th>Время</th><th>Направление</th><th>Группа</th><th>Тренер</th></tr>
+          <tr><th>День</th><th>Время</th><th>Группа</th></tr>
         </thead>
         <tbody>
-          <tr><td class="day">Понедельник</td><td class="time">00:00 — 00:00</td><td>Направление</td><td>Группа</td><td>Имя Ф.</td></tr>
-          <tr><td class="day">Вторник</td><td class="time">00:00 — 00:00</td><td>Направление</td><td>Группа</td><td>Имя Ф.</td></tr>
-          <tr><td class="day">Среда</td><td class="time">00:00 — 00:00</td><td>Направление</td><td>Группа</td><td>Имя Ф.</td></tr>
-          <tr><td class="day">Четверг</td><td class="time">00:00 — 00:00</td><td>Направление</td><td>Группа</td><td>Имя Ф.</td></tr>
-          <tr><td class="day">Пятница</td><td class="time">00:00 — 00:00</td><td>Направление</td><td>Группа</td><td>Имя Ф.</td></tr>
-          <tr><td class="day">Суббота</td><td class="time">00:00 — 00:00</td><td>Направление</td><td>Группа</td><td>Имя Ф.</td></tr>
-          <tr><td class="day">Воскресенье</td><td class="time">—</td><td>выходной</td><td>—</td><td>—</td></tr>
+          <tr><td class="day">Понедельник</td><td class="time">17:00 — 19:00</td><td>Младшая группа</td></tr>
+          <tr><td class="day">Понедельник</td><td class="time">19:00 — 21:00</td><td>Старшая группа</td></tr>
+          <tr><td class="day">Среда</td><td class="time">17:00 — 19:00</td><td>Младшая группа</td></tr>
+          <tr><td class="day">Среда</td><td class="time">19:00 — 21:00</td><td>Старшая группа</td></tr>
+          <tr><td class="day">Пятница</td><td class="time">17:00 — 19:00</td><td>Младшая группа</td></tr>
+          <tr><td class="day">Пятница</td><td class="time">19:00 — 21:00</td><td>Старшая группа</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="sched-note ph-text">Сноска под таблицей: например, «расписание может меняться, актуальное — в телеграм-канале».</p>
+    <p class="sched-note ph-text">Уточните возрастные рамки групп — например, «младшая 7–12 лет, старшая от 13». Без этого родителю непонятно, куда идти его ребёнку.</p>
   </div>
 </section>
 
