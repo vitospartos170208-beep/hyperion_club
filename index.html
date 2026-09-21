@@ -415,6 +415,12 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
 .check{display:flex;gap:11px;align-items:flex-start;margin:20px 0 22px;font-size:.76rem;color:var(--muted);cursor:pointer}
 .check input{width:17px;height:17px;flex-shrink:0;margin-top:2px;accent-color:var(--accent)}
 .check a{color:var(--accent);text-decoration:underline}
+/* карточка «позвоните нам» вместо формы */
+.phonecard .form__body{text-align:center}
+.phonecard__num{
+  font-family:var(--ff-head);font-size:clamp(1.3rem,2.6vw,1.8rem);
+  padding:26px 14px;border:1px dashed var(--line);margin-top:8px;
+}
 .form__ok{display:none;text-align:center;padding:34px 10px}
 .form__ok i{display:block;width:56px;height:56px;margin:0 auto 18px;background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);display:grid;place-items:center;font-size:1.6rem;font-style:normal}
 .form.is-sent .form__body{display:none}
@@ -541,8 +547,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
     <li><a class="mobnav__link" href="#coaches"><i>03</i>Тренеры</a></li>
     <li><a class="mobnav__link" href="#schedule"><i>04</i>Расписание</a></li>
     <li><a class="mobnav__link" href="#prices"><i>05</i>Цены</a></li>
-    <li><a class="mobnav__link" href="#faq"><i>06</i>Вопросы</a></li>
-    <li><a class="mobnav__link" href="#contacts"><i>07</i>Контакты</a></li>
+    <li><a class="mobnav__link" href="#contacts"><i>06</i>Контакты</a></li>
   </ul>
   <div class="mobnav__foot">
     <a href="tel:+79508552624" class="btn btn--ghost btn--block">+7 (950) 855-26-24</a>
@@ -562,14 +567,14 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
   <div class="container hero__in">
     <span class="tagline">Кикбоксинг · Тайский бокс · Бокс</span>
 
-    <h1>Заголовок<br>первого экрана<em>в две строки</em></h1>
+    <h1>Приходите на тренировку<br>в клуб кикбоксинга<em>«Гиперион»</em></h1>
 
-    <p class="hero__lead ph-text">Подзаголовок: одно-два предложения о том, кому подходит клуб и какой результат человек получит. 15–25 слов, без воды.</p>
+    <p class="hero__lead">Групповые тренировки для взрослых и детей на проспекте Космонавтов — от техники и общей физической формы до первых соревнований.</p>
 
     <div class="hero__actions">
       <a href="#signup" class="btn">Записаться на пробную</a>
       <a href="#directions" class="btn btn--ghost">Смотреть направления</a>
-      <span class="hero__note"><b>—</b> первая тренировка бесплатно · текст уточним</span>
+      <span class="hero__note"><b>—</b> первая тренировка бесплатно, без предоплаты</span>
     </div>
 
     <div class="stats">
@@ -600,30 +605,30 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
           <img src="img/hyperion/about.jpg" width="900" height="1200" loading="lazy" decoding="async"
                alt="Юный боец клуба «Гиперион» в шлеме и перчатках на ринге">
         </div>
-        <div class="about__badge"><b>00</b><span>лет в городе</span></div>
+        <div class="about__badge"><b>6</b><span>лет в городе</span></div>
       </div>
 
       <div class="rv">
         <span class="kicker"><b>01</b> — О клубе</span>
-        <h2>Заголовок блока <span>о клубе</span></h2>
-        <p class="ph-text">Абзац о клубе: кто вы, сколько лет работаете, чем отличаетесь от зала «через дорогу». 3–4 предложения живым языком, без «динамично развивающейся команды профессионалов».</p>
+        <h2>Место, где <span>тренируются всерьёз</span></h2>
+        <p>Гиперион работает в Ростове-на-Дону 6 лет. Сейчас в клубе занимается около 40 учеников — взрослые и дети, кто только начинает и кто уже выходит на ринг. Тренируемся в одном зале на проспекте Космонавтов, а не распыляемся на несколько точек по городу, поэтому тренер успевает видеть каждого.</p>
 
         <div class="about__list">
           <div class="about__item">
             <i>01</i>
-            <div><h4>Преимущество первое</h4><p class="ph-text">Одно предложение-расшифровка.</p></div>
+            <div><h4>Для всех уровней</h4><p>От первого шага до кикбоксинга в лайт- и фулл-контакте — растёте в своём темпе.</p></div>
           </div>
           <div class="about__item">
             <i>02</i>
-            <div><h4>Преимущество второе</h4><p class="ph-text">Одно предложение-расшифровка.</p></div>
+            <div><h4>Свой зал</h4><p>Один зал на проспекте Космонавтов, постоянные группы и тренер, который вас знает.</p></div>
           </div>
           <div class="about__item">
             <i>03</i>
-            <div><h4>Преимущество третье</h4><p class="ph-text">Одно предложение-расшифровка.</p></div>
+            <div><h4>Понятное расписание</h4><p>Три тренировки в неделю, отдельные группы для младших и старших — без путаницы.</p></div>
           </div>
           <div class="about__item">
             <i>04</i>
-            <div><h4>Преимущество четвёртое</h4><p class="ph-text">Одно предложение-расшифровка.</p></div>
+            <div><h4>Первая тренировка бесплатно</h4><p>Приходите посмотреть на зал и команду, ничего не платя заранее.</p></div>
           </div>
         </div>
       </div>
@@ -637,7 +642,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
     <div class="sec-head rv">
       <span class="kicker"><b>02</b> — Направления</span>
       <h2>Что <span>тренируем</span></h2>
-      <p class="ph-text">Подводка к блоку: 1–2 предложения. Например, что есть группы под любой уровень и возраст.</p>
+      <p>Три направления одного клуба: с кикбоксинга начинают все, а дальше выбирают лайт- или фулл-контакт — в зависимости от целей и характера.</p>
     </div>
 
     <div class="grid-3">
@@ -646,7 +651,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
         <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M6 10a4 4 0 018 0v5a3 3 0 01-3 3H9a3 3 0 01-3-3z"/><path d="M14 12h2a2 2 0 010 4h-2"/></svg></div>
         <h3>Кикбоксинг</h3>
         <p>База, с которой начинают все: стойка, передвижение, удары руками и ногами, работа на мешках и лапах, общая физика. Отсюда человек переходит в тот раздел, который ему ближе.</p>
-        <div class="card__meta"><span class="tag ph-text">возраст</span><span class="tag ph-text">уровень</span><span class="tag ph-text">длительность</span></div>
+        <div class="card__meta"><span class="tag ph-text">возраст</span><span class="tag">любой уровень</span><span class="tag">2 часа</span></div>
       </article>
 
       <article class="card rv">
@@ -654,7 +659,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
         <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></div>
         <h3>Лайт-контакт</h3>
         <p>Раздел с ограниченной силой удара: судьи оценивают технику, точность и скорость, а не тяжесть попадания. Нокауты правилами исключены — поэтому с лайт-контакта обычно начинают дети и те, кто выходит на первые соревнования.</p>
-        <div class="card__meta"><span class="tag ph-text">возраст</span><span class="tag ph-text">уровень</span><span class="tag ph-text">длительность</span></div>
+        <div class="card__meta"><span class="tag ph-text">возраст</span><span class="tag">новичкам и опытным</span><span class="tag">2 часа</span></div>
       </article>
 
       <article class="card rv">
@@ -662,7 +667,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
         <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M4 12h4l2-5 4 10 2-5h4"/></svg></div>
         <h3>Фулл-контакт</h3>
         <p>Полноконтактный раздел: удары руками и ногами в полную силу, выше пояса, с нокдаунами и нокаутами. Обязательная экипировка и допуск тренера. Сюда идут те, кто хочет драться на ринге всерьёз.</p>
-        <div class="card__meta"><span class="tag ph-text">возраст</span><span class="tag ph-text">уровень</span><span class="tag ph-text">длительность</span></div>
+        <div class="card__meta"><span class="tag ph-text">возраст</span><span class="tag">подготовленным</span><span class="tag">2 часа</span></div>
       </article>
     </div>
   </div>
@@ -674,7 +679,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
     <div class="sec-head rv">
       <span class="kicker"><b>03</b> — Тренеры</span>
       <h2>Кто будет <span>вас тренировать</span></h2>
-      <p class="ph-text">Подводка: 1–2 предложения о команде. Регалии тренеров — главный аргумент доверия, соберите их точно.</p>
+      <p>Один тренер, который проводит каждую тренировку сам — никаких сменных инструкторов.</p>
     </div>
 
     <div class="grid-4 grid-4--solo">
@@ -799,153 +804,27 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
   </div>
 </section>
 
-<!-- ======================= ОТЗЫВЫ ======================= -->
-<section class="section" id="reviews">
-  <div class="container">
-    <div class="sec-head rv">
-      <span class="kicker"><b>07</b> — Отзывы</span>
-      <h2>Что говорят <span>ученики</span></h2>
-      <p class="ph-text">3–6 отзывов. Лучше со скринов 2ГИС / Яндекса — так им больше верят.</p>
-    </div>
-
-    <div class="grid-3">
-      <article class="review rv">
-        <div class="review__q">“</div>
-        <div class="stars" aria-label="5 из 5">
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-        </div>
-        <p class="ph-text">Текст отзыва: 2–4 предложения. Идеально — с конкретикой: «пришёл с нулём, через полгода первые соревнования».</p>
-        <div class="review__who"><div class="review__ava">ИФ</div><div><b>Имя Фамилия</b><span>кто это / сколько занимается</span></div></div>
-      </article>
-
-      <article class="review rv">
-        <div class="review__q">“</div>
-        <div class="stars" aria-label="5 из 5">
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-        </div>
-        <p class="ph-text">Текст отзыва: 2–4 предложения. Родительский отзыв о детской группе работает отдельно хорошо.</p>
-        <div class="review__who"><div class="review__ava">ИФ</div><div><b>Имя Фамилия</b><span>кто это / сколько занимается</span></div></div>
-      </article>
-
-      <article class="review rv">
-        <div class="review__q">“</div>
-        <div class="stars" aria-label="5 из 5">
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-          <svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .9-5 4.8 1.2 7L12 17.8 5.8 21.2 7 14.2 2 9.4l7-.9z"/></svg>
-        </div>
-        <p class="ph-text">Текст отзыва: 2–4 предложения. Хорошо заходит история «боялся идти, оказалось нормально».</p>
-        <div class="review__who"><div class="review__ava">ИФ</div><div><b>Имя Фамилия</b><span>кто это / сколько занимается</span></div></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ======================= FAQ ======================= -->
-<section class="section section--alt" id="faq">
-  <div class="container">
-    <div class="sec-head sec-head--center rv">
-      <span class="kicker"><b>08</b> — Вопросы</span>
-      <h2>Частые <span>вопросы</span></h2>
-      <p class="ph-text">Соберите реальные вопросы, которые задают в директе и по телефону — они снимают возражения до звонка.</p>
-    </div>
-
-    <div class="faq rv" id="faqRoot">
-      <div class="faq__item">
-        <button class="faq__q" type="button">Вопрос 01 — например, нужна ли физподготовка?</button>
-        <div class="faq__a"><p class="ph-text">Ответ: 2–4 предложения. Прямо и без «индивидуальный подход к каждому клиенту».</p></div>
-      </div>
-      <div class="faq__item">
-        <button class="faq__q" type="button">Вопрос 02 — что взять с собой на первую тренировку?</button>
-        <div class="faq__a"><p class="ph-text">Ответ: 2–4 предложения.</p></div>
-      </div>
-      <div class="faq__item">
-        <button class="faq__q" type="button">Вопрос 03 — с какого возраста берёте детей?</button>
-        <div class="faq__a"><p class="ph-text">Ответ: 2–4 предложения.</p></div>
-      </div>
-      <div class="faq__item">
-        <button class="faq__q" type="button">Вопрос 04 — нужна ли своя экипировка?</button>
-        <div class="faq__a"><p class="ph-text">Ответ: 2–4 предложения.</p></div>
-      </div>
-      <div class="faq__item">
-        <button class="faq__q" type="button">Вопрос 05 — обязательно ли участвовать в спаррингах?</button>
-        <div class="faq__a"><p class="ph-text">Ответ: 2–4 предложения.</p></div>
-      </div>
-      <div class="faq__item">
-        <button class="faq__q" type="button">Вопрос 06 — можно ли заморозить абонемент?</button>
-        <div class="faq__a"><p class="ph-text">Ответ: 2–4 предложения.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ======================= ФОРМА ======================= -->
 <section class="section cta" id="signup">
   <div class="container cta__grid">
     <div class="rv">
-      <span class="kicker"><b>09</b> — Запись</span>
+      <span class="kicker"><b>07</b> — Запись</span>
       <h2>Первая тренировка <span>бесплатно</span></h2>
-      <p class="ph-text">Текст-подводка к форме: что произойдёт после отправки, за сколько перезвоните, что человек ничем не обязан.</p>
+      <p>Позвоните — ответим на вопросы и запишем на удобный день. Платить заранее не нужно.</p>
       <ul class="cta__list">
-        <li class="ph-text">Что получит после заявки — пункт 1</li>
-        <li class="ph-text">Что получит после заявки — пункт 2</li>
-        <li class="ph-text">Что получит после заявки — пункт 3</li>
+        <li>Ответим на все вопросы о тренировках</li>
+        <li>Подберём группу и время</li>
+        <li>Первая тренировка — бесплатно, без обязательств</li>
       </ul>
     </div>
 
-    <form class="form rv" id="signupForm" novalidate>
+    <div class="form phonecard rv">
       <div class="form__body">
-        <h3>Записаться</h3>
-        <p>Перезвоним в течение — минут</p>
-
-        <div class="field" id="f-name">
-          <label for="i-name">Имя</label>
-          <input type="text" id="i-name" name="name" placeholder="Как к вам обращаться" autocomplete="name">
-          <span class="err-msg">Укажите имя</span>
-        </div>
-
-        <div class="field" id="f-phone">
-          <label for="i-phone">Телефон</label>
-          <input type="tel" id="i-phone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel">
-          <span class="err-msg">Укажите корректный телефон</span>
-        </div>
-
-        <div class="field" id="f-dir">
-          <label for="i-dir">Направление</label>
-          <select id="i-dir" name="direction">
-            <option value="">Выберите направление</option>
-            <option>Кикбоксинг</option>
-            <option>Лайт-контакт</option>
-            <option>Фулл-контакт</option>
-            <option>Пока не определился</option>
-          </select>
-          <span class="err-msg">Выберите направление</span>
-        </div>
-
-        <label class="check">
-          <input type="checkbox" id="i-agree">
-          <span>Согласен на обработку персональных данных и с <a href="#">политикой конфиденциальности</a></span>
-        </label>
-
-        <button type="submit" class="btn btn--block">Отправить заявку</button>
+        <h3>Позвоните нам</h3>
+        <p>Ответим и запишем на тренировку</p>
+        <div class="phonecard__num ph-text">Номер телефона — добавим</div>
       </div>
-
-      <div class="form__ok" role="status">
-        <i>✓</i>
-        <h3>Заявка отправлена</h3>
-        <p>Это демо-форма. На боевом сайте заявка уходит в CRM и в телеграм тренеру.</p>
-      </div>
-    </form>
+    </div>
   </div>
 </section>
 
@@ -953,7 +832,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
 <section class="section" id="contacts">
   <div class="container">
     <div class="sec-head rv">
-      <span class="kicker"><b>10</b> — Контакты</span>
+      <span class="kicker"><b>08</b> — Контакты</span>
       <h2>Как нас <span>найти</span></h2>
     </div>
 
@@ -995,7 +874,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
           <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#0B0B0D"><path d="M7 8h3v3h4V8h3v8h-3v-3h-4v3H7z"/></svg></span>
           <span class="logo__txt">ГИПЕРИОН<span class="logo__sub">клуб кикбоксинга</span></span>
         </a>
-        <p class="footer__about ph-text">Короткое описание клуба в 1–2 строки.</p>
+        <p class="footer__about">Клуб кикбоксинга в Ростове-на-Дону: тренировки для детей и взрослых, от первого шага до соревнований.</p>
       </div>
 
       <div class="footer__col">
@@ -1013,8 +892,6 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
         <ul>
           <li><a href="#prices">Цены</a></li>
           <li><a href="#gallery">Зал</a></li>
-          <li><a href="#reviews">Отзывы</a></li>
-          <li><a href="#faq">Вопросы</a></li>
         </ul>
       </div>
 
@@ -1022,7 +899,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
         <h4>КОНТАКТЫ</h4>
         <ul>
           <li><a href="tel:+79508552624">+7 (950) 855-26-24</a></li>
-          <li><a href="#contacts">г. —, ул. —</a></li>
+          <li><a href="#contacts">просп. Космонавтов, 2Е</a></li>
           <li><a href="#signup">Записаться</a></li>
         </ul>
       </div>
@@ -1098,59 +975,6 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
     }, {rootMargin:'-45% 0px -50% 0px'});
     sections.forEach(function(s){ if (s) navIO.observe(s); });
   }
-
-  /* ---- FAQ ---- */
-  document.getElementById('faqRoot').addEventListener('click', function(e){
-    var btn = e.target.closest('.faq__q');
-    if (!btn) return;
-    var item = btn.parentNode;
-    var body = item.querySelector('.faq__a');
-    var open = item.classList.contains('is-open');
-
-    this.querySelectorAll('.faq__item.is-open').forEach(function(other){
-      other.classList.remove('is-open');
-      other.querySelector('.faq__a').style.maxHeight = null;
-    });
-
-    if (!open) {
-      item.classList.add('is-open');
-      body.style.maxHeight = body.scrollHeight + 'px';
-    }
-  });
-
-  /* ---- маска телефона (простая) ---- */
-  var phone = document.getElementById('i-phone');
-  phone.addEventListener('input', function(){
-    var d = this.value.replace(/\D/g, '');
-    if (d[0] === '8') d = '7' + d.slice(1);
-    if (d[0] !== '7') d = '7' + d;
-    d = d.slice(0, 11);
-    var out = '+7';
-    if (d.length > 1) out += ' (' + d.slice(1, 4);
-    if (d.length >= 5) out += ') ' + d.slice(4, 7);
-    if (d.length >= 8) out += '-' + d.slice(7, 9);
-    if (d.length >= 10) out += '-' + d.slice(9, 11);
-    this.value = out;
-  });
-
-  /* ---- отправка формы (заглушка) ---- */
-  var form = document.getElementById('signupForm');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var ok = true;
-    var check = function(id, valid){
-      document.getElementById(id).classList.toggle('field--err', !valid);
-      if (!valid) ok = false;
-    };
-    check('f-name', document.getElementById('i-name').value.trim().length >= 2);
-    check('f-phone', document.getElementById('i-phone').value.replace(/\D/g,'').length === 11);
-    check('f-dir', document.getElementById('i-dir').value !== '');
-    if (!document.getElementById('i-agree').checked) ok = false;
-
-    if (!ok) return;
-    /* здесь будет реальная отправка: fetch в CRM / телеграм-бота */
-    form.classList.add('is-sent');
-  });
 
   /* ---- год в подвале ---- */
   document.getElementById('year').textContent = new Date().getFullYear();
