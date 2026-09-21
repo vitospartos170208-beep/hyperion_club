@@ -308,6 +308,8 @@ p{text-wrap:pretty}
 .grid-4--duo{grid-template-columns:repeat(2,1fr);max-width:760px;margin-inline:auto}
 /* один тренер — центрируем карточку */
 .grid-4--solo{grid-template-columns:1fr;max-width:380px;margin-inline:auto}
+/* три тренера — не растягиваем на четыре колонки */
+.grid-4--trio{grid-template-columns:repeat(3,1fr);max-width:1080px;margin-inline:auto}
 .coach{background:var(--surface);border:1px solid var(--line);overflow:hidden;transition:border-color .3s,transform .3s var(--ease)}
 .coach:hover{border-color:var(--accent);transform:translateY(-4px)}
 .coach .ph-img{aspect-ratio:3/4;border:0;border-bottom:1px solid var(--line)}
@@ -492,7 +494,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
   :root{--gut:18px}
   .stats{grid-template-columns:repeat(2,1fr)}
   .grid-3,.grid-4,.grid-4--duo,.grid-3--duo{grid-template-columns:1fr}
-  .grid-4--duo,.grid-4--solo,.grid-3--duo{max-width:420px}
+  .grid-4--duo,.grid-4--solo,.grid-3--duo,.grid-4--trio{max-width:420px}
   .hero{min-height:auto;padding:120px 0 56px}
   .hero__actions{margin-bottom:44px}
   .hero__actions .btn{width:100%}
@@ -679,10 +681,10 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
     <div class="sec-head rv">
       <span class="kicker"><b>03</b> — Тренеры</span>
       <h2>Кто будет <span>вас тренировать</span></h2>
-      <p>Один тренер, который проводит каждую тренировку сам — никаких сменных инструкторов.</p>
+      <p>Три тренера — у каждого свой профиль, от общей физики до соревновательного уровня.</p>
     </div>
 
-    <div class="grid-4 grid-4--solo">
+    <div class="grid-4 grid-4--trio">
       <article class="coach rv">
         <div class="ph-img ph-img--photo">
           <img src="img/hyperion/coach-2.jpg" width="676" height="900" loading="lazy" decoding="async"
@@ -692,6 +694,30 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
           <div class="coach__role">Главный тренер клуба</div>
           <h3>Артур Дадаян</h3>
           <p class="ph-text">Разряд или звание, стаж, у кого учился, какие группы ведёт — уточнить у тренера. Отчество тоже: «Игоревич» в открытых источниках не подтвердилось.</p>
+        </div>
+      </article>
+
+      <article class="coach rv">
+        <div class="ph-img ph-img--photo">
+          <img src="img/hyperion/coach-flyer-a.jpg" width="355" height="420" loading="lazy" decoding="async"
+               alt="Тренер по тайскому боксу и К1, чемпион России, СНГ, Европы и США">
+        </div>
+        <div class="coach__body">
+          <div class="coach__role">Тренер по тайскому боксу / К1</div>
+          <h3 class="ph-text">Имя Фамилия — пришлите, кто это</h3>
+          <p>Чемпион России, СНГ, Европы и США. Ведёт групповые и индивидуальные тренировки.</p>
+        </div>
+      </article>
+
+      <article class="coach rv">
+        <div class="ph-img ph-img--photo">
+          <img src="img/hyperion/coach-gorbunov.jpg" width="353" height="470" loading="lazy" decoding="async"
+               alt="Максим Горбунов, тренер по тайскому боксу">
+        </div>
+        <div class="coach__body">
+          <div class="coach__role">Тренер по тайскому боксу</div>
+          <h3>Максим Горбунов</h3>
+          <p>Групповые тренировки для взрослых — от новичков до опытных: постановка ударов руками, ногами, локтями и коленями, подготовка к соревнованиям.</p>
         </div>
       </article>
     </div>
