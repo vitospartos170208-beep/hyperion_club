@@ -3,11 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ГИПЕРИОН — клуб кикбоксинга</title>
-<meta name="description" content="Клуб кикбоксинга «Гиперион». Тренировки для взрослых и детей.">
-<!-- ВРЕМЕННО: сайт не дозаполнен, закрыт от поисковиков.
-     УДАЛИТЬ эту строку перед запуском рекламы, иначе сайта не будет в поиске. -->
-<meta name="robots" content="noindex, nofollow">
+<title>Гиперион — клуб кикбоксинга в Ростове-на-Дону</title>
+<meta name="description" content="Клуб кикбоксинга «Гиперион» в Ростове-на-Дону, мкр. Северный, просп. Космонавтов, 2Е. Группы для детей с 5 лет и взрослых. Первая тренировка бесплатно.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -246,18 +243,14 @@ p{text-wrap:pretty}
 .section--alt::before,.section--alt::after{content:"";position:absolute;left:0;right:0;height:1px;background:var(--line)}
 .section--alt::before{top:0}.section--alt::after{bottom:0}
 
-.sec-head{max-width:760px;margin-bottom:clamp(40px,5vw,68px)}
-.sec-head--center{margin-inline:auto;text-align:center}
-.kicker{
-  display:inline-flex;align-items:center;gap:12px;margin-bottom:18px;
-  font-family:var(--ff-head);text-transform:uppercase;font-size:.74rem;letter-spacing:.24em;color:var(--muted);
-}
-.kicker b{color:var(--accent);font-weight:600}
-.kicker::after{content:"";width:36px;height:1px;background:var(--line)}
-.sec-head h2{margin-bottom:18px}
+.sec-head{max-width:760px;margin:0 auto clamp(40px,5vw,68px);text-align:center}
+/* черта перед заголовком секции и линия после */
+.section h2::before,.section h2::after{content:"";display:inline-block;height:.06em;vertical-align:.33em}
+.section h2::before{width:.45em;margin-right:.35em;background:var(--muted)}
+.section h2::after{width:1.1em;margin-left:.35em;background:var(--line)}
+.section h2{margin-bottom:18px}
 .sec-head h2 span{color:var(--accent)}
-.sec-head p{max-width:620px}
-.sec-head--center p{margin-inline:auto}
+.sec-head p{max-width:620px;margin-inline:auto}
 
 /* ============ 9. О КЛУБЕ ============ */
 .about{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,4vw,64px);align-items:center}
@@ -317,6 +310,13 @@ p{text-wrap:pretty}
 .coach__role{font-size:.68rem;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);margin-bottom:8px}
 .coach h3{font-size:1.18rem;margin-bottom:10px}
 .coach p{font-size:.85rem}
+.coach__links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.coach__link{
+  display:inline-flex;align-items:center;gap:9px;padding:9px 14px;
+  border:1px solid var(--line);font-size:.84rem;color:var(--muted);transition:.2s;
+}
+.coach__link:hover{border-color:var(--accent);color:var(--accent)}
+.coach__link svg{width:17px;height:17px;flex-shrink:0}
 
 /* ============ 12. РАСПИСАНИЕ ============ */
 .sched-wrap{border:1px solid var(--line);overflow-x:auto;background:var(--surface)}
@@ -417,12 +417,11 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
 .check{display:flex;gap:11px;align-items:flex-start;margin:20px 0 22px;font-size:.76rem;color:var(--muted);cursor:pointer}
 .check input{width:17px;height:17px;flex-shrink:0;margin-top:2px;accent-color:var(--accent)}
 .check a{color:var(--accent);text-decoration:underline}
-/* карточка «позвоните нам» вместо формы */
+/* карточка «напишите в Telegram» вместо формы */
 .phonecard .form__body{text-align:center}
-.phonecard__num{
-  font-family:var(--ff-head);font-size:clamp(1.3rem,2.6vw,1.8rem);
-  padding:26px 14px;border:1px dashed var(--line);margin-top:8px;
-}
+.phonecard .btn{margin-top:22px}
+.phonecard .btn svg{width:20px;height:20px;fill:currentColor}
+.phonecard__handle{margin-top:12px;font-size:.84rem;color:var(--muted)}
 .form__ok{display:none;text-align:center;padding:34px 10px}
 .form__ok i{display:block;width:56px;height:56px;margin:0 auto 18px;background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent);display:grid;place-items:center;font-size:1.6rem;font-style:normal}
 .form.is-sent .form__body{display:none}
@@ -475,6 +474,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
 /* ============ 21. АДАПТИВ ============ */
 @media (max-width:1100px){
   .grid-4{grid-template-columns:repeat(2,1fr)}
+  .grid-4--solo{grid-template-columns:1fr}
   .footer__top{grid-template-columns:1fr 1fr}
 }
 @media (max-width:980px){
@@ -611,7 +611,6 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
       </div>
 
       <div class="rv">
-        <span class="kicker"><b>01</b> — О клубе</span>
         <h2>Место, где <span>тренируются всерьёз</span></h2>
         <p>Гиперион работает в Ростове-на-Дону 6 лет. Сейчас в клубе занимается около 40 учеников — взрослые и дети, кто только начинает и кто уже выходит на ринг. Тренируемся в одном зале на проспекте Космонавтов, а не распыляемся на несколько точек по городу, поэтому тренер успевает видеть каждого.</p>
 
@@ -642,7 +641,6 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
 <section class="section section--alt" id="directions">
   <div class="container">
     <div class="sec-head rv">
-      <span class="kicker"><b>02</b> — Направления</span>
       <h2>Что <span>тренируем</span></h2>
       <p>Три направления одного клуба: с кикбоксинга начинают все, а дальше выбирают лайт- или фулл-контакт — в зависимости от целей и характера.</p>
     </div>
@@ -653,7 +651,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
         <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M6 10a4 4 0 018 0v5a3 3 0 01-3 3H9a3 3 0 01-3-3z"/><path d="M14 12h2a2 2 0 010 4h-2"/></svg></div>
         <h3>Кикбоксинг</h3>
         <p>База, с которой начинают все: стойка, передвижение, удары руками и ногами, работа на мешках и лапах, общая физика. Отсюда человек переходит в тот раздел, который ему ближе.</p>
-        <div class="card__meta"><span class="tag ph-text">возраст</span><span class="tag">любой уровень</span><span class="tag">2 часа</span></div>
+        <div class="card__meta"><span class="tag">с 5 лет</span><span class="tag">любой уровень</span><span class="tag">2 часа</span></div>
       </article>
 
       <article class="card rv">
@@ -661,7 +659,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
         <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></div>
         <h3>Лайт-контакт</h3>
         <p>Раздел с ограниченной силой удара: судьи оценивают технику, точность и скорость, а не тяжесть попадания. Нокауты правилами исключены — поэтому с лайт-контакта обычно начинают дети и те, кто выходит на первые соревнования.</p>
-        <div class="card__meta"><span class="tag ph-text">возраст</span><span class="tag">новичкам и опытным</span><span class="tag">2 часа</span></div>
+        <div class="card__meta"><span class="tag">с 5 лет</span><span class="tag">новичкам и опытным</span><span class="tag">2 часа</span></div>
       </article>
 
       <article class="card rv">
@@ -669,7 +667,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
         <div class="card__ico"><svg viewBox="0 0 24 24"><path d="M4 12h4l2-5 4 10 2-5h4"/></svg></div>
         <h3>Фулл-контакт</h3>
         <p>Полноконтактный раздел: удары руками и ногами в полную силу, выше пояса, с нокдаунами и нокаутами. Обязательная экипировка и допуск тренера. Сюда идут те, кто хочет драться на ринге всерьёз.</p>
-        <div class="card__meta"><span class="tag ph-text">возраст</span><span class="tag">подготовленным</span><span class="tag">2 часа</span></div>
+        <div class="card__meta"><span class="tag">с 5 лет</span><span class="tag">для всех уровней</span><span class="tag">2 часа</span></div>
       </article>
     </div>
   </div>
@@ -679,12 +677,11 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
 <section class="section" id="coaches">
   <div class="container">
     <div class="sec-head rv">
-      <span class="kicker"><b>03</b> — Тренеры</span>
-      <h2>Кто будет <span>вас тренировать</span></h2>
-      <p>Три тренера — у каждого свой профиль, от общей физики до соревновательного уровня.</p>
+      <h2>Кто будет<br><span>вас тренировать</span></h2>
+      <p>Тренировки ведёт главный тренер клуба — от общей физики до подготовки к соревнованиям.</p>
     </div>
 
-    <div class="grid-4 grid-4--trio">
+    <div class="grid-4 grid-4--solo">
       <article class="coach rv">
         <div class="ph-img ph-img--photo">
           <img src="img/hyperion/coach-2.jpg" width="676" height="900" loading="lazy" decoding="async"
@@ -693,31 +690,12 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
         <div class="coach__body">
           <div class="coach__role">Главный тренер клуба</div>
           <h3>Артур Дадаян</h3>
-          <p class="ph-text">Разряд или звание, стаж, у кого учился, какие группы ведёт — уточнить у тренера. Отчество тоже: «Игоревич» в открытых источниках не подтвердилось.</p>
-        </div>
-      </article>
-
-      <article class="coach rv">
-        <div class="ph-img ph-img--photo">
-          <img src="img/hyperion/coach-flyer-a.jpg" width="355" height="420" loading="lazy" decoding="async"
-               alt="Тренер по тайскому боксу и К1, чемпион России, СНГ, Европы и США">
-        </div>
-        <div class="coach__body">
-          <div class="coach__role">Тренер по тайскому боксу / К1</div>
-          <h3 class="ph-text">Имя Фамилия — пришлите, кто это</h3>
-          <p>Чемпион России, СНГ, Европы и США. Ведёт групповые и индивидуальные тренировки.</p>
-        </div>
-      </article>
-
-      <article class="coach rv">
-        <div class="ph-img ph-img--photo">
-          <img src="img/hyperion/coach-gorbunov.jpg" width="353" height="470" loading="lazy" decoding="async"
-               alt="Максим Горбунов, тренер по тайскому боксу">
-        </div>
-        <div class="coach__body">
-          <div class="coach__role">Тренер по тайскому боксу</div>
-          <h3>Максим Горбунов</h3>
-          <p>Групповые тренировки для взрослых — от новичков до опытных: постановка ударов руками, ногами, локтями и коленями, подготовка к соревнованиям.</p>
+          <div class="coach__links">
+            <a class="coach__link" href="https://www.instagram.com/mr_l_perfect/" target="_blank" rel="noopener" aria-label="Instagram Артура Дадаяна">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              @mr_l_perfect
+            </a>
+          </div>
         </div>
       </article>
     </div>
@@ -728,9 +706,7 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
 <section class="section section--alt" id="schedule">
   <div class="container">
     <div class="sec-head rv">
-      <span class="kicker"><b>04</b> — Расписание</span>
       <h2>Когда <span>тренировки</span></h2>
-      <p>Тренировки три раза в неделю — понедельник, среда и пятница. Две группы идут подряд.</p>
     </div>
 
     <div class="sched-wrap rv">
@@ -739,24 +715,22 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
           <tr><th>День</th><th>Время</th><th>Группа</th></tr>
         </thead>
         <tbody>
-          <tr><td class="day">Понедельник</td><td class="time">17:00 — 19:00</td><td>Младшая группа</td></tr>
-          <tr><td class="day">Понедельник</td><td class="time">19:00 — 21:00</td><td>Старшая группа</td></tr>
-          <tr><td class="day">Среда</td><td class="time">17:00 — 19:00</td><td>Младшая группа</td></tr>
-          <tr><td class="day">Среда</td><td class="time">19:00 — 21:00</td><td>Старшая группа</td></tr>
-          <tr><td class="day">Пятница</td><td class="time">17:00 — 19:00</td><td>Младшая группа</td></tr>
-          <tr><td class="day">Пятница</td><td class="time">19:00 — 21:00</td><td>Старшая группа</td></tr>
+          <tr><td class="day">Понедельник</td><td class="time">17:00 — 19:00</td><td>Детская группа · до 14 лет</td></tr>
+          <tr><td class="day">Понедельник</td><td class="time">19:00 — 21:00</td><td>Старшая группа · от 15 лет</td></tr>
+          <tr><td class="day">Среда</td><td class="time">17:00 — 19:00</td><td>Детская группа · до 14 лет</td></tr>
+          <tr><td class="day">Среда</td><td class="time">19:00 — 21:00</td><td>Старшая группа · от 15 лет</td></tr>
+          <tr><td class="day">Пятница</td><td class="time">17:00 — 19:00</td><td>Детская группа · до 14 лет</td></tr>
+          <tr><td class="day">Пятница</td><td class="time">19:00 — 21:00</td><td>Старшая группа · от 15 лет</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="sched-note ph-text">Уточните возрастные рамки групп — например, «младшая 7–12 лет, старшая от 13». Без этого родителю непонятно, куда идти его ребёнку.</p>
   </div>
 </section>
 
 <!-- ======================= ЦЕНЫ ======================= -->
 <section class="section" id="prices">
   <div class="container">
-    <div class="sec-head sec-head--center rv">
-      <span class="kicker"><b>05</b> — Цены</span>
+    <div class="sec-head rv">
       <h2>Абонементы <span>и разовые</span></h2>
       <p>Всё просто: приходите на первую тренировку бесплатно, а дальше — один абонемент без скрытых доплат.</p>
     </div>
@@ -796,7 +770,6 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
 <section class="section section--alt" id="gallery">
   <div class="container">
     <div class="sec-head rv">
-      <span class="kicker"><b>06</b> — Зал</span>
       <h2>Где вы будете <span>тренироваться</span></h2>
       <p>Зал, ринг, мешки, тренировки и соревнования — живые кадры с занятий и турниров, без стоков.</p>
     </div>
@@ -834,9 +807,8 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
 <section class="section cta" id="signup">
   <div class="container cta__grid">
     <div class="rv">
-      <span class="kicker"><b>07</b> — Запись</span>
       <h2>Первая тренировка <span>бесплатно</span></h2>
-      <p>Позвоните — ответим на вопросы и запишем на удобный день. Платить заранее не нужно.</p>
+      <p>Напишите нам в Telegram — ответим на вопросы и запишем на удобный день. Платить заранее не нужно.</p>
       <ul class="cta__list">
         <li>Ответим на все вопросы о тренировках</li>
         <li>Подберём группу и время</li>
@@ -846,9 +818,13 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
 
     <div class="form phonecard rv">
       <div class="form__body">
-        <h3>Позвоните нам</h3>
+        <h3>Напишите нам</h3>
         <p>Ответим и запишем на тренировку</p>
-        <div class="phonecard__num ph-text">Номер телефона — добавим</div>
+        <a class="btn btn--block" href="https://t.me/Hyperion_K1" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3L18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L6.9 12.9l-4.5-1.4c-1-.3-1-1 .2-1.5l17.6-6.8c.8-.3 1.5.2 1.2 1.1z"/></svg>
+          Написать в Telegram
+        </a>
+        <div class="phonecard__handle">@Hyperion_K1</div>
       </div>
     </div>
   </div>
@@ -858,7 +834,6 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
 <section class="section" id="contacts">
   <div class="container">
     <div class="sec-head rv">
-      <span class="kicker"><b>08</b> — Контакты</span>
       <h2>Как нас <span>найти</span></h2>
     </div>
 
@@ -866,13 +841,11 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
       <div class="contacts__list rv">
         <div class="cnt"><span>Адрес</span><b>Ростов-на-Дону, просп. Космонавтов, 2Е<br>микрорайон Северный</b></div>
         <div class="cnt"><span>Телефон</span><b><a href="tel:+79508552624">+7 (950) 855-26-24</a></b></div>
-        <div class="cnt"><span>Часы работы</span><b class="ph-text">Пришлите режим по дням — на Яндекс.Картах указано только «открыто до 23:00»</b></div>
         <div class="cnt">
           <span>Соцсети</span>
           <div class="socials">
-            <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.9 4.3L18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L6.9 12.9l-4.5-1.4c-1-.3-1-1 .2-1.5l17.6-6.8c.8-.3 1.5.2 1.2 1.1z"/></svg></a>
-            <a href="#" aria-label="ВКонтакте"><svg viewBox="0 0 24 24"><path d="M12.8 17c-5 0-8-3.5-8.1-9.2h2.5c.1 4.2 2 6 3.4 6.4V7.8h2.4v3.6c1.4-.2 2.9-1.8 3.4-3.6h2.3c-.4 2.2-1.9 3.8-3 4.5 1.1.5 2.9 2 3.5 4.7h-2.6c-.5-1.6-1.8-2.9-3.6-3.1V17z"/></svg></a>
-            <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1a13 13 0 01-6.6-5.8c-.5-.8-.8-1.7-.8-2.5 0-.9.5-1.4.7-1.6.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2 0 .4-.1.6l-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.5.3.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.4.3.1.2.1.6 0 1.1z"/></svg></a>
+            <a href="https://t.me/Hyperion_K1" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.9 4.3L18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L6.9 12.9l-4.5-1.4c-1-.3-1-1 .2-1.5l17.6-6.8c.8-.3 1.5.2 1.2 1.1z"/></svg></a>
+            <a href="https://wa.me/79508552624" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1a13 13 0 01-6.6-5.8c-.5-.8-.8-1.7-.8-2.5 0-.9.5-1.4.7-1.6.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2 0 .4-.1.6l-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2 1.3 2.3 1.5.3.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l2 1c.2.1.4.2.4.3.1.2.1.6 0 1.1z"/></svg></a>
           </div>
         </div>
       </div>
@@ -933,7 +906,6 @@ table.sched{width:100%;min-width:480px;border-collapse:collapse}
 
     <div class="footer__bot">
       <span>© <span id="year">2026</span> Клуб кикбоксинга «Гиперион»</span>
-      <span><a href="#">Политика конфиденциальности</a> · <a href="#">Договор оферты</a></span>
     </div>
   </div>
 </footer>
